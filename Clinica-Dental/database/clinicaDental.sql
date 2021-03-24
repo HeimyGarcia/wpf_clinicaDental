@@ -59,23 +59,6 @@ CREATE TABLE Pacientes.Cita (
 )
 GO
 
-
--- Crear las tablas de HistorialConsulta
-CREATE TABLE Pacientes.HistorialConsulta (
-	idHistorialConsulta INT NOT NULL IDENTITY,
-	idHistorialClinico INT NOT NULL,
-	motivoConsulta VARCHAR(200) NOT NULL,
-	identidadPaciente VARCHAR(20) NOT NULL,
-	CONSTRAINT PK_HistorialConsulta_idHistorialConsulta
-		PRIMARY KEY CLUSTERED (idHistorialConsulta),
-	CONSTRAINT Fk_HistorialConsulta$Pertenece$Paciente
-		foreign key (identidadPaciente) references Pacientes.Paciente(identidad),
-	CONSTRAINT Fk_HistorialConsulta$Pertenece$HistorialClinico
-		foreign key (idHistorialClinico) references Pacientes.HistorialClinico(idHistorialClinico)
-)
-GO
-
-
 -- Crear las tablas de DetalleTratamiento
 CREATE TABLE Pacientes.DetalleTratamiento (
 	idTratamiento INT NOT NULL IDENTITY,
@@ -113,7 +96,22 @@ CREATE TABLE Empleados.Empleado (
 )
 GO
 
---1. Tabla los tratamoientos por consulta
+-- Crear las tablas de HistorialConsulta
+CREATE TABLE Pacientes.HistorialConsulta (
+	idHistorialConsulta INT NOT NULL IDENTITY,
+	idHistorialClinico INT NOT NULL,
+	motivoConsulta VARCHAR(200) NOT NULL,
+	identidadEmpleado VARCHAR(20) NOT NULL,
+	CONSTRAINT PK_HistorialConsulta_idHistorialConsulta
+		PRIMARY KEY CLUSTERED (idHistorialConsulta),
+	CONSTRAINT Fk_HistorialConsulta$Pertenece$Empleado
+		foreign key (identidadEmpleado) references Empleados.Empleado(identidad),
+	CONSTRAINT Fk_HistorialConsulta$Pertenece$HistorialClinico
+		foreign key (idHistorialClinico) references Pacientes.HistorialClinico(idHistorialClinico)
+)
+GO
+
+--1. Tabla los tratamientos por consulta
 create table Pacientes.Tratamiento
 (
 	idTratamiento int not null,
@@ -125,4 +123,40 @@ create table Pacientes.Tratamiento
 	constraint Fk_Tratamiento$Pertenece$HistorialConsulta
 		foreign key (idHistorialConsulta) references Pacientes.HistorialConsulta(idHistorialConsulta)
 )
+GO
+
+--Tabla de usuario
+
+CREATE TABLE Empleados.Usuario (
+	id INT NOT NULL IDENTITY (500, 1),
+	nombreCompleto VARCHAR(255) NOT NULL,
+	username VARCHAR(100) NOT NULL,
+	password VARCHAR(100) NOT NULL,
+	estado BIT NOT NULL,
+	CONSTRAINT PK_Usuario_id
+		PRIMARY KEY CLUSTERED (id)
+)
+GO
+
+
+
+-- Restricciones de las tablas
+
+-- El sexo es: Masculino, Femenino.
+ALTER TABLE Pacientes.Paciente WITH CHECK
+	ADD CONSTRAINT CHK_Pacientes_Paciente$sexoPaciente
+	CHECK (sexo IN('Masculino', 'Femenino'))
+GO
+
+
+-- No puede existir nombres de usuarios repetidos
+ALTER TABLE Empleados.Usuario
+	ADD CONSTRAINT AK_Empleados_Usuario_username
+	UNIQUE NONCLUSTERED (username)
+GO
+
+-- La contraseña debe contener al menos 6 caracteres
+ALTER TABLE Empleados.Usuario WITH CHECK
+	ADD CONSTRAINT CHK_Empleados_Usuario$VerificarLongitudContraseña
+	CHECK (LEN(password) >= 6)
 GO
