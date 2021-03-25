@@ -20,6 +20,9 @@ namespace Clinica_Dental
     /// </summary>
     public partial class MainWindow : Window
     {
+        // Objeto de tipo usuario para implementar su funcionalidad
+        private Usuario usuario = new Usuario();
+
         public MainWindow()
         {
             InitializeComponent();
@@ -33,6 +36,37 @@ namespace Clinica_Dental
         private void Border_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             DragMove();
+        }
+
+        private void ButtonIniciar_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                // Implementar la búsqueda del usuario desde la clase Usuario
+                Usuario elUsuario = usuario.BuscarUsuario(txtUsuario.Text);
+
+                // Verificar si el usuario existe
+                if (elUsuario.Username == null)
+                    MessageBox.Show("El usuario o la contraseña no es correcta. Favor verificar.");
+                else
+                {
+                    // Verificar que la contraseña ingresada es igual a la contraseña
+                    // almacenada en la base de datos
+                    if (elUsuario.Password == pwbContraseña.Password && elUsuario.Estado)
+                    {
+                        MessageBox.Show("Bienvenido al sistema!!!.");
+                    }
+                    else if (!elUsuario.Estado)
+                        MessageBox.Show("Tu usuario se encuentra innactivo. Favor comunicarte con el personal de IT");
+                    else
+                        MessageBox.Show("El usuario o la contraseña no es correcta. Favor verificar.");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                Console.WriteLine(ex.Message);
+            }
         }
     }
 }
