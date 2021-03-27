@@ -160,3 +160,11 @@ ALTER TABLE Empleados.Usuario WITH CHECK
 	ADD CONSTRAINT CHK_Empleados_Usuario$VerificarLongitudContraseña
 	CHECK (LEN(password) >= 6)
 GO
+
+
+-- Ingresar datos
+
+insert into Empleados.Usuario
+values ('Heimy Daniela Garcia Giron','Daniela22','holamundo',1)
+
+select * from Empleados.Usuario
