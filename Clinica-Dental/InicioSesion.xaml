@@ -12,7 +12,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Clinica_Dental"
         mc:Ignorable="d"
-        Title="MainWindow" Height="400" Width="425" WindowStyle="None" AllowsTransparency="True" WindowStartupLocation="CenterScreen">
+        Title="InicioSesión" Height="400" Width="425" WindowStyle="None" AllowsTransparency="True" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
