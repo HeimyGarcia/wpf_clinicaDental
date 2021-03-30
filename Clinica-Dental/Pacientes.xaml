@@ -45,7 +45,7 @@
             </Grid>
         </Border>
 
-        <Label Content="Información del Paciente" FontSize="20" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="6" Margin="10 0" HorizontalAlignment="Center"/>
+        <Label Content="Información del Paciente" FontSize="25" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="6" Margin="0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
         <Label Content="Identidad" Grid.Row="2" Grid.Column="0" Margin="10 0"/>
         <Label Content="Nombres" Grid.Row="2" Grid.Column="1" Margin="10 0"/>
         <Label Content="Apellidos" Grid.Row="2" Grid.Column="2" Margin="10 0"/>
@@ -54,6 +54,7 @@
         <Label Content="Dirección" Grid.Row="4" Grid.Column="2" Margin="10 0"/>
         <Label Content="Fecha de nacimiento" Grid.Row="6" Grid.Column="0" Margin="10 0 0 4"/>
         <Label Content="Sexo" Grid.Row="6" Grid.Column="2" Margin="10 0" HorizontalAlignment="Right"/>
+        <Image Source="/Imagenes/LogoMedicDentalSystem.jpeg.jpeg" Grid.Row="1" Grid.Column="1" Stretch="Uniform" Margin="10 0 0 10" HorizontalAlignment="Right"/>
 
         <TextBox Name="txtIdentidad" Grid.Row="3" Grid.Column="0"  Margin="10 4 4 4" Background="LightGray"/>
         <TextBox Name="txtNombre" Grid.Row="3" Grid.Column="1"  Margin="4 4" Background="LightGray"/>
@@ -76,7 +77,6 @@
         <DatePicker Name="dtpFechaNacimiento" Grid.Row="6" Grid.Column="1" Margin="4 4"/>
         <ComboBox Name="cmbSexo" Grid.Row ="6" Grid.Column="3" Margin="4 4" Background="LightGray"/>
 
-        <Grid x:Name="grdPacientes" Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="6" Margin="10 10"/>
-
+        <Grid x:Name="grdPacientes" Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="6" Margin="10 10" Background="LightBlue"/>
     </Grid>
 </Window>
