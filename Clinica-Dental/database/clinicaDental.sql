@@ -26,6 +26,7 @@ CREATE TABLE Pacientes.Paciente (
 	celular VARCHAR(15) NOT NULL,
 	fechaNacimiento DATE NOT NULL,
 	sexo VARCHAR(15) NOT NULL,
+	estado BIT NOT NULL,
 	CONSTRAINT PK_Paciente_identidad
 		PRIMARY KEY CLUSTERED (identidad)
 )
@@ -38,6 +39,7 @@ CREATE TABLE Pacientes.HistorialClinico (
 	fechaCreacion DATE NOT NULL,
 	observaciones VARCHAR(200) NOT NULL,
 	afecciones VARCHAR(200) NOT NULL,
+	estado BIT NOT NULL,
 	CONSTRAINT PK_HistorialClinico_idHistorialClinico
 		PRIMARY KEY CLUSTERED (idHistorialClinico),
 	CONSTRAINT Fk_HistorialClinico$Pertenece$Paciente
@@ -52,6 +54,7 @@ CREATE TABLE Pacientes.Cita (
 	fechaCita DATE NOT NULL,
 	hora TIME(2) NOT NULL,
 	nota VARCHAR(200) NOT NULL,
+	estado BIT NOT NULL,
 	CONSTRAINT PK_Cita_idCita
 		PRIMARY KEY CLUSTERED (idCita),
 	CONSTRAINT Fk_Cita$Pertenece$HistorialClinico
@@ -65,6 +68,7 @@ CREATE TABLE Pacientes.DetalleTratamiento (
 	duracionTratamiento VARCHAR(200) NOT NULL,
 	indicaciones VARCHAR(200) NOT NULL,
 	precio DECIMAL NOT NULL,
+	estado BIT NOT NULL,
 	CONSTRAINT PK_DetalleTratamiento_idTratamiento
 		PRIMARY KEY CLUSTERED (idTratamiento)
 )
@@ -89,6 +93,7 @@ CREATE TABLE Empleados.Empleado (
 	celular VARCHAR(15) NOT NULL,
 	sexo VARCHAR(15) NOT NULL,
 	idPuesto INT NOT NULL,
+	estado BIT NOT NULL,
 	CONSTRAINT PK_Empleado_identidad
 		PRIMARY KEY CLUSTERED (identidad),
 	CONSTRAINT Fk_Empleado$Pertenece$Puesto
@@ -102,6 +107,7 @@ CREATE TABLE Pacientes.HistorialConsulta (
 	idHistorialClinico INT NOT NULL,
 	motivoConsulta VARCHAR(200) NOT NULL,
 	identidadEmpleado VARCHAR(20) NOT NULL,
+	estado BIT NOT NULL,
 	CONSTRAINT PK_HistorialConsulta_idHistorialConsulta
 		PRIMARY KEY CLUSTERED (idHistorialConsulta),
 	CONSTRAINT Fk_HistorialConsulta$Pertenece$Empleado
@@ -116,6 +122,7 @@ create table Pacientes.Tratamiento
 (
 	idTratamiento int not null,
 	idHistorialConsulta int not null,
+	estado BIT NOT NULL,
 	constraint PK_Tratamiento_idTratamiento_idHistorialConsulta
 		primary key clustered(idTratamiento, idHistorialConsulta), --Para acceder a los datos
 	constraint Fk_Tratamiento$Existe$DetalleTratamiento
@@ -128,7 +135,7 @@ GO
 --Tabla de usuario
 
 CREATE TABLE Empleados.Usuario (
-	id INT NOT NULL IDENTITY (500, 1),
+	id INT NOT NULL IDENTITY,
 	nombreCompleto VARCHAR(255) NOT NULL,
 	username VARCHAR(100) NOT NULL,
 	password VARCHAR(100) NOT NULL,
@@ -138,7 +145,7 @@ CREATE TABLE Empleados.Usuario (
 )
 GO
 
-
+drop table Empleados.Usuario
 
 -- Restricciones de las tablas
 
