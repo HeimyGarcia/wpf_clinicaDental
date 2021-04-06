@@ -82,7 +82,7 @@ namespace Clinica_Dental
                 sqlCommand.Parameters.AddWithValue("@direccion", paciente.Direccion);
                 sqlCommand.Parameters.AddWithValue("@correo", paciente.Correo);
                 sqlCommand.Parameters.AddWithValue("@celular", paciente.Celular);
-                //sqlCommand.Parameters.AddWithValue("@fechaNacimiento", paciente.FechaNacimiento.ToString("yyyy-MM-dd"));
+                sqlCommand.Parameters.AddWithValue("@fechaNacimiento", paciente.FechaNacimiento.ToString("yyyy-MM-dd"));
                 sqlCommand.Parameters.AddWithValue("@sexo", ObtenerSexo(paciente.SexoPaciente));
 
                 // Ejecutar el comando de inserción
