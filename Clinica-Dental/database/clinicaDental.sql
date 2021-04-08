@@ -65,6 +65,7 @@ GO
 -- Crear las tablas de DetalleTratamiento
 CREATE TABLE Pacientes.DetalleTratamiento (
 	idTratamiento INT NOT NULL IDENTITY,
+	nombreTratamiento VARCHAR(200) NOT NULL,
 	duracionTratamiento VARCHAR(200) NOT NULL,
 	indicaciones VARCHAR(200) NOT NULL,
 	precio DECIMAL NOT NULL,
@@ -73,6 +74,7 @@ CREATE TABLE Pacientes.DetalleTratamiento (
 		PRIMARY KEY CLUSTERED (idTratamiento)
 )
 GO
+drop table Pacientes.DetalleTratamiento
 
 -- Crear las tablas de Puesto
 CREATE TABLE Empleados.Puesto (
@@ -105,6 +107,7 @@ GO
 CREATE TABLE Pacientes.HistorialConsulta (
 	idHistorialConsulta INT NOT NULL IDENTITY,
 	idHistorialClinico INT NOT NULL,
+	fechaConsulta DATE NOT NULL,
 	motivoConsulta VARCHAR(200) NOT NULL,
 	identidadEmpleado VARCHAR(20) NOT NULL,
 	estado BIT NOT NULL,
@@ -116,6 +119,7 @@ CREATE TABLE Pacientes.HistorialConsulta (
 		foreign key (idHistorialClinico) references Pacientes.HistorialClinico(idHistorialClinico)
 )
 GO
+drop table Pacientes.HistorialConsulta
 
 --1. Tabla los tratamientos por consulta
 create table Pacientes.Tratamiento
@@ -131,7 +135,7 @@ create table Pacientes.Tratamiento
 		foreign key (idHistorialConsulta) references Pacientes.HistorialConsulta(idHistorialConsulta)
 )
 GO
-
+drop table Pacientes.Tratamiento
 --Tabla de usuario
 
 CREATE TABLE Empleados.Usuario (
