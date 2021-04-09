@@ -144,8 +144,12 @@ CREATE TABLE Empleados.Usuario (
 	username VARCHAR(100) NOT NULL,
 	password VARCHAR(100) NOT NULL,
 	estado BIT NOT NULL,
+	idPuesto INT NOT NULL,
 	CONSTRAINT PK_Usuario_id
-		PRIMARY KEY CLUSTERED (id)
+		PRIMARY KEY CLUSTERED (id),
+	CONSTRAINT Fk_Usuario$Pertenece$Puesto
+		foreign key (idPuesto) references Empleados.Puesto(idPuesto)
+
 )
 GO
 
