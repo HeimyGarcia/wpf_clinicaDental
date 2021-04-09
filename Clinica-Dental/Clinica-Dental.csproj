@@ -82,6 +82,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Empleado.xaml.cs">
+      <DependentUpon>Empleado.xaml</DependentUpon>
+    </Compile>
     <Compile Include="menuPrincipal.xaml.cs">
       <DependentUpon>menuPrincipal.xaml</DependentUpon>
     </Compile>
@@ -90,6 +93,10 @@
       <DependentUpon>Pacientes.xaml</DependentUpon>
     </Compile>
     <Compile Include="Usuario.cs" />
+    <Page Include="Empleado.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="InicioSesion.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
