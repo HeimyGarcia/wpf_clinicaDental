@@ -109,6 +109,7 @@ CREATE TABLE Pacientes.HistorialConsulta (
 	idHistorialClinico INT NOT NULL,
 	fechaConsulta DATE NOT NULL,
 	motivoConsulta VARCHAR(200) NOT NULL,
+	observaciones VARCHAR(200) NOT NULL,
 	identidadEmpleado VARCHAR(20) NOT NULL,
 	estado BIT NOT NULL,
 	CONSTRAINT PK_HistorialConsulta_idHistorialConsulta
