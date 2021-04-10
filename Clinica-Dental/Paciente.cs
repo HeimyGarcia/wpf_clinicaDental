@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Data.SqlClient;
 using System.Configuration;
 using System.Globalization;
+using System.Data;
 
 namespace Clinica_Dental
 {
@@ -15,6 +16,12 @@ namespace Clinica_Dental
     {
         Masculino = 'M',
         Femenino = 'F'
+    }
+
+    public enum estado
+    {
+        Activo = 1,
+        Inactivo = 0
     }
 
     class Paciente
@@ -32,10 +39,11 @@ namespace Clinica_Dental
         public string Celular { get; set; }
         public DateTime FechaNacimiento { get; set; }
         public Sexo SexoPaciente { get; set; }
+        public estado Estado { get; set; }
 
         //Constructores
         public Paciente() { }
-        public Paciente(string identidad, string nombres, string apellidos, string direccion, string correo, string celular, DateTime fecha, Sexo sexo)
+        public Paciente(string identidad, string nombres, string apellidos, string direccion, string correo, string celular, DateTime fecha, Sexo sexo, estado status)
         {
             Identidad = identidad;
             Nombres = nombres;
@@ -45,6 +53,7 @@ namespace Clinica_Dental
             Celular = celular;
             FechaNacimiento = fecha;
             SexoPaciente = sexo;
+            Estado = status;
         }
 
         private string ObtenerSexo(Sexo sexo)
@@ -60,6 +69,31 @@ namespace Clinica_Dental
             }
         }
 
+        private int ObtenerEstado(estado estado)
+        {
+            switch (estado)
+            {
+                case estado.Activo:
+                    return 1;
+                case estado.Inactivo:
+                    return 0;
+                default:
+                    return 1;
+            }
+        }
+        private int CambiarEstado(estado estado)
+        {
+            switch (estado)
+            {
+                case estado.Activo:
+                    return 0;
+                case estado.Inactivo:
+                    return 0;
+                default:
+                    return 0;
+            }
+        }
+
 
         /// <summary>
         /// Inserta un paciente en la base de datos.
@@ -70,15 +104,15 @@ namespace Clinica_Dental
             try
             {
                 // Query de inserción
-                string query = @"insert into [Pacientes].[Paciente]
-                                values ('@identidad','@nombres','@apellidos','@direccion',
-                                '@correo','@celular','@fechaNacimiento','@sexo')";
+                string query = @"insert into[Pacientes].[Paciente]
+                        values(@identidad, @nombres, @apellidos, @direccion, @correo, @celular, @fechaNacimiento, @sexo, @estado)";
 
                 // Establecer la conexión
                 sqlConnection.Open();
 
                 // Crear el comando SQL
                 SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+                string fecha = paciente.FechaNacimiento.ToString("yyyy-MM-dd");
 
                 // Establecer los valores de los parámetros;
                 sqlCommand.Parameters.AddWithValue("@identidad", paciente.Identidad);
@@ -89,6 +123,7 @@ namespace Clinica_Dental
                 sqlCommand.Parameters.AddWithValue("@celular", paciente.Celular);
                 sqlCommand.Parameters.AddWithValue("@fechaNacimiento", paciente.FechaNacimiento.ToString("yyyy-MM-dd"));
                 sqlCommand.Parameters.AddWithValue("@sexo", ObtenerSexo(paciente.SexoPaciente));
+                sqlCommand.Parameters.AddWithValue("@estado", ObtenerEstado(paciente.Estado));
 
                 // Ejecutar el comando de inserción
                 sqlCommand.ExecuteNonQuery();
@@ -137,7 +172,8 @@ namespace Clinica_Dental
                             Celular = rdr["celular"].ToString(),
                             Direccion = rdr["direccion"].ToString(),
                             FechaNacimiento = Convert.ToDateTime(rdr["fechaNacimiento"]),
-                            SexoPaciente = (Sexo)Convert.ToChar(rdr["sexo"].ToString().Substring(0, 1))
+                            SexoPaciente = (Sexo)Convert.ToChar(rdr["sexo"].ToString().Substring(0, 1)),
+                            Estado = (estado)Convert.ToInt32((rdr["estado"]))
                         });
                     }
                 }
@@ -165,7 +201,8 @@ namespace Clinica_Dental
                 // Query de actualización
                 string query = @"update [Pacientes].[Paciente]
                                 set  nombres = @nombres,apellidos = @apellidos,direccion = @direccion,
-                                correoElectronico = @correoElectronico,celular = @celular,sexo = @sexo
+                                correoElectronico = @correoElectronico,celular = @celular,sexo = @sexo,
+                                fechaNacimiento = @fechaNacimiento, estado = @estado
                                 where identidad = @identidad";
 
                 // Establecer la conexión
@@ -183,6 +220,7 @@ namespace Clinica_Dental
                 sqlCommand.Parameters.AddWithValue("@celular", paciente.Celular);
                 sqlCommand.Parameters.AddWithValue("@fechaNacimiento", paciente.FechaNacimiento.ToString("yyyy-MM-dd"));
                 sqlCommand.Parameters.AddWithValue("@sexo", ObtenerSexo(paciente.SexoPaciente));
+                sqlCommand.Parameters.AddWithValue("@estado", ObtenerEstado(paciente.Estado));
 
                 // Ejecutar el comando de actualización
                 sqlCommand.ExecuteNonQuery();
@@ -207,7 +245,8 @@ namespace Clinica_Dental
             try
             {
                 // Query de eliminación
-                string query = @"DELETE FROM [Pacientes].[Paciente]
+                string query = @"update [Pacientes].[Paciente]
+                                 set estado = @estado
                                  WHERE identidad = @identidad";
 
                 // Establecer la conexión
@@ -269,6 +308,7 @@ namespace Clinica_Dental
                         elpaciente.Direccion = rdr["direccion"].ToString();
                         elpaciente.FechaNacimiento = Convert.ToDateTime(rdr["fechaNacimiento"]);
                         elpaciente.SexoPaciente = (Sexo)Convert.ToChar(rdr["sexo"].ToString().Substring(0, 1));
+                        elpaciente.Estado = (estado)Convert.ToInt32((rdr["estado"]));
                     }
                 }
 

@@ -28,6 +28,9 @@ namespace Clinica_Dental
             // Llenar el combobox de sexo
             cmbSexo.ItemsSource = Enum.GetValues(typeof(Sexo));
 
+            // Llenar el combobox de estado
+            cmbEstado.ItemsSource = Enum.GetValues(typeof(estado));
+
             ObtenerPacientes();
         }
 
@@ -47,6 +50,7 @@ namespace Clinica_Dental
             txtCelular.Text = string.Empty;
             dtpFechaNacimiento.SelectedDate = null;
             cmbSexo.SelectedValue = null;
+            cmbEstado.SelectedValue = null;
         }
 
         private void ObtenerValoresFormulario()
@@ -57,8 +61,9 @@ namespace Clinica_Dental
             paciente.Direccion = txtDireccion.Text;
             paciente.Correo = txtCorreo.Text;
             paciente.Celular = txtCelular.Text;
-            paciente.FechaNacimiento = dtpFechaNacimiento.SelectedDate.Value;
+            paciente.FechaNacimiento = Convert.ToDateTime(dtpFechaNacimiento.Text);
             paciente.SexoPaciente = (Sexo)cmbSexo.SelectedValue;
+            paciente.Estado = (estado)cmbEstado.SelectedValue;
 
         }
 
@@ -82,6 +87,7 @@ namespace Clinica_Dental
             txtCelular.Text = paciente.Celular;
             dtpFechaNacimiento.SelectedDate = paciente.FechaNacimiento;
             cmbSexo.SelectedValue = paciente.SexoPaciente;
+            cmbEstado.SelectedValue = paciente.Estado;
         }
 
         private bool VerificarValores()
@@ -93,9 +99,9 @@ namespace Clinica_Dental
                 MessageBox.Show("Por favor ingresa todos los valores en las cajas de texto");
                 return false;
             }
-            else if (cmbSexo.SelectedValue == null)
+            else if (cmbSexo.SelectedValue == null || cmbEstado.SelectedValue == null)
             {
-                MessageBox.Show("Por favor selecciona el estado de la habitación");
+                MessageBox.Show("Por favor selecciona el estado y sexo del paciente");
                 return false;
             }
             else if (dtpFechaNacimiento.SelectedDate == null)
@@ -155,7 +161,7 @@ namespace Clinica_Dental
         private void btnModificar_Click(object sender, RoutedEventArgs e)
         {
             if (dgvPacientes.SelectedValue == null)
-                MessageBox.Show("Por favor selecciona una habitación desde el listado");
+                MessageBox.Show("Por favor selecciona un paciente desde el listado");
             else
             {
                 if (VerificarValores())
@@ -230,9 +236,10 @@ namespace Clinica_Dental
 
         private void btnBuscar_Click(object sender, RoutedEventArgs e)
         {
-            paciente = paciente.BuscarPersona(txtIdentidad.Text);
+            paciente = paciente.BuscarPersona(txtPaciente.Text);
 
             ValoresFormularioDesdeObjeto();
+            Inhabilitar();
         }
     }
 }
