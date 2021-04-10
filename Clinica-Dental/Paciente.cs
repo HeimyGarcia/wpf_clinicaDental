@@ -18,7 +18,7 @@ namespace Clinica_Dental
         Femenino = 'F'
     }
 
-    public enum estado
+    public enum EstadoPaciente
     {
         Activo = 1,
         Inactivo = 0
@@ -39,11 +39,11 @@ namespace Clinica_Dental
         public string Celular { get; set; }
         public DateTime FechaNacimiento { get; set; }
         public Sexo SexoPaciente { get; set; }
-        public estado Estado { get; set; }
+        public EstadoPaciente Estado { get; set; }
 
         //Constructores
         public Paciente() { }
-        public Paciente(string identidad, string nombres, string apellidos, string direccion, string correo, string celular, DateTime fecha, Sexo sexo, estado status)
+        public Paciente(string identidad, string nombres, string apellidos, string direccion, string correo, string celular, DateTime fecha, Sexo sexo, EstadoPaciente status)
         {
             Identidad = identidad;
             Nombres = nombres;
@@ -69,25 +69,25 @@ namespace Clinica_Dental
             }
         }
 
-        private int ObtenerEstado(estado estado)
+        private int ObtenerEstado(EstadoPaciente estadoPaciente)
         {
-            switch (estado)
+            switch (estadoPaciente)
             {
-                case estado.Activo:
+                case EstadoPaciente.Activo:
                     return 1;
-                case estado.Inactivo:
+                case EstadoPaciente.Inactivo:
                     return 0;
                 default:
                     return 1;
             }
         }
-        private int CambiarEstado(estado estado)
+        private int CambiarEstado(EstadoPaciente estadoPaciente)
         {
-            switch (estado)
+            switch (estadoPaciente)
             {
-                case estado.Activo:
+                case EstadoPaciente.Activo:
                     return 0;
-                case estado.Inactivo:
+                case EstadoPaciente.Inactivo:
                     return 0;
                 default:
                     return 0;
@@ -173,7 +173,7 @@ namespace Clinica_Dental
                             Direccion = rdr["direccion"].ToString(),
                             FechaNacimiento = Convert.ToDateTime(rdr["fechaNacimiento"]),
                             SexoPaciente = (Sexo)Convert.ToChar(rdr["sexo"].ToString().Substring(0, 1)),
-                            Estado = (estado)Convert.ToInt32((rdr["estado"]))
+                            Estado = (EstadoPaciente)Convert.ToInt32((rdr["estado"]))
                         });
                     }
                 }
@@ -308,7 +308,7 @@ namespace Clinica_Dental
                         elpaciente.Direccion = rdr["direccion"].ToString();
                         elpaciente.FechaNacimiento = Convert.ToDateTime(rdr["fechaNacimiento"]);
                         elpaciente.SexoPaciente = (Sexo)Convert.ToChar(rdr["sexo"].ToString().Substring(0, 1));
-                        elpaciente.Estado = (estado)Convert.ToInt32((rdr["estado"]));
+                        elpaciente.Estado = (EstadoPaciente)Convert.ToInt32((rdr["estado"]));
                     }
                 }
 

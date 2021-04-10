@@ -29,7 +29,7 @@ namespace Clinica_Dental
             cmbSexo.ItemsSource = Enum.GetValues(typeof(Sexo));
 
             // Llenar el combobox de estado
-            cmbEstado.ItemsSource = Enum.GetValues(typeof(estado));
+            cmbEstado.ItemsSource = Enum.GetValues(typeof(EstadoPaciente));
 
             ObtenerPacientes();
         }
@@ -63,7 +63,7 @@ namespace Clinica_Dental
             paciente.Celular = txtCelular.Text;
             paciente.FechaNacimiento = Convert.ToDateTime(dtpFechaNacimiento.Text);
             paciente.SexoPaciente = (Sexo)cmbSexo.SelectedValue;
-            paciente.Estado = (estado)cmbEstado.SelectedValue;
+            paciente.Estado = (EstadoPaciente)cmbEstado.SelectedValue;
 
         }
 
