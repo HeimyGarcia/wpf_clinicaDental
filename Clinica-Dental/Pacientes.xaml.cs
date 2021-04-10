@@ -114,10 +114,10 @@ namespace Clinica_Dental
             {
                 try
                 {
-                    // Obtener los valores para la habitación
+                    // Obtener los valores para el paciente
                     ObtenerValoresFormulario();
 
-                    // Insertar los datos de la habitación
+                    // Insertar los datos del paciente
                     paciente.AgregarPaciente(paciente);
 
                     // Mensaje de inserción exitosa
@@ -162,7 +162,7 @@ namespace Clinica_Dental
                 {
                     try
                     {
-                        // Obtener los valores para la habitación desde el formulario
+                        // Obtener los valores para del paciente desde el formulario
                         ObtenerValoresFormulario();
 
                         // Mostrar un mensaje de confirmación
@@ -208,7 +208,7 @@ namespace Clinica_Dental
 
                     if (result == MessageBoxResult.Yes)
                     {
-                        // Eliminar la habitación
+                        // Eliminar el paciente
                         paciente.EliminarPaciente(txtIdentidad.Text);
                     }
                 }
