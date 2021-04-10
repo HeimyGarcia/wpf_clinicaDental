@@ -60,6 +60,11 @@ namespace Clinica_Dental
             }
         }
 
+
+        /// <summary>
+        /// Inserta un paciente en la base de datos.
+        /// </summary>
+        /// <param name="paciente">Información del paciente de ingresar</param>
         public void AgregarPaciente(Paciente paciente)
         {
             try
@@ -99,6 +104,10 @@ namespace Clinica_Dental
             }
         }
 
+        /// <summary>
+        /// Mostrar la lista de información de los pacientes.
+        /// </summary>
+        /// <returns>Lista de pacientes.</returns>
         public List<Paciente> MostrarPaciente()
         {
             //Inicializar una lista vacía de los Pacientes
@@ -115,7 +124,7 @@ namespace Clinica_Dental
                 // Crear el comando SQL
                 SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
 
-                // Obtener los datos de las habitaciones
+                // Obtener los datos del paciente
                 using (SqlDataReader rdr = sqlCommand.ExecuteReader())
                 {
                     while (rdr.Read()) {
@@ -145,6 +154,10 @@ namespace Clinica_Dental
             }
         }
 
+        /// <summary>
+        /// Modifica un paciente de la base de datos.
+        /// </summary>
+        /// <param name="paciente">Información del pacientes a modificar</param>
         public void ModificarPaciente(Paciente paciente)
         {
             try
@@ -185,6 +198,10 @@ namespace Clinica_Dental
             }
         }
 
+        /// <summary>
+        /// Modifica el estado de los datos de un paciente.
+        /// </summary>
+        /// <param name="identidad">Información del paciente a eliminar</param>
         public void EliminarPaciente(string identidad)
         {
             try
@@ -216,6 +233,11 @@ namespace Clinica_Dental
             }
         }
 
+        /// <summary>
+        /// Buscar una persona por su identidad
+        /// </summary>
+        /// <param name="identidad">Identidad del paciente a buscar</param>
+        /// <returns>Paciente si es encontrado</returns>
         public Paciente BuscarPersona(string identidad)
         {
             Paciente elpaciente = new Paciente();
