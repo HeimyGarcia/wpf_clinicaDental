@@ -74,16 +74,7 @@ CREATE TABLE Pacientes.DetalleTratamiento (
 		PRIMARY KEY CLUSTERED (idTratamiento)
 )
 GO
-drop table Pacientes.DetalleTratamiento
 
--- Crear las tablas de Puesto
-CREATE TABLE Empleados.Puesto (
-	idPuesto INT NOT NULL IDENTITY,
-	DescripcionPuesto VARCHAR(100) NOT NULL,
-	CONSTRAINT PK_Puesto_idPuesto
-		PRIMARY KEY CLUSTERED (idPuesto)
-)
-GO
 
 -- Crear las tablas de Empleado
 CREATE TABLE Empleados.Empleado (
@@ -94,14 +85,13 @@ CREATE TABLE Empleados.Empleado (
 	correoElectronico VARCHAR(200) NOT NULL,
 	celular VARCHAR(15) NOT NULL,
 	sexo VARCHAR(15) NOT NULL,
-	idPuesto INT NOT NULL,
+	puesto VARCHAR(100) NOT NULL,
 	estado BIT NOT NULL,
 	CONSTRAINT PK_Empleado_identidad
-		PRIMARY KEY CLUSTERED (identidad),
-	CONSTRAINT Fk_Empleado$Pertenece$Puesto
-		foreign key (idPuesto) references Empleados.Puesto(idPuesto)
+		PRIMARY KEY CLUSTERED (identidad)
 )
 GO
+
 
 -- Crear las tablas de HistorialConsulta
 CREATE TABLE Pacientes.HistorialConsulta (
@@ -120,10 +110,10 @@ CREATE TABLE Pacientes.HistorialConsulta (
 		foreign key (idHistorialClinico) references Pacientes.HistorialClinico(idHistorialClinico)
 )
 GO
-drop table Pacientes.HistorialConsulta
+
 
 --1. Tabla los tratamientos por consulta
-create table Pacientes.Tratamiento
+create table Pacientes.ConsultaTratamiento
 (
 	idTratamiento int not null,
 	idHistorialConsulta int not null,
@@ -136,7 +126,6 @@ create table Pacientes.Tratamiento
 		foreign key (idHistorialConsulta) references Pacientes.HistorialConsulta(idHistorialConsulta)
 )
 GO
-drop table Pacientes.Tratamiento
 --Tabla de usuario
 
 CREATE TABLE Empleados.Usuario (
@@ -145,18 +134,38 @@ CREATE TABLE Empleados.Usuario (
 	username VARCHAR(100) NOT NULL,
 	password VARCHAR(100) NOT NULL,
 	estado BIT NOT NULL,
-	idPuesto INT NOT NULL,
+	tipoUsuario VARCHAR(100) NOT NULL,
 	CONSTRAINT PK_Usuario_id
 		PRIMARY KEY CLUSTERED (id),
-	CONSTRAINT Fk_Usuario$Pertenece$Puesto
-		foreign key (idPuesto) references Empleados.Puesto(idPuesto)
-
 )
 GO
 
-drop table Empleados.Usuario
 
 -- Restricciones de las tablas
+
+-- El tipousuario es: Administrador, Usuario.
+ALTER TABLE Empleados.Usuario WITH CHECK
+	ADD CONSTRAINT CHK_Empleados_Usuario$tipoUsuarioPaciente
+	CHECK (tipoUsuario IN('Administrador', 'Usuario'))
+GO
+
+-- El puesto es: Recepcionista,Odontologo,higienista dental,ortodontologo,asistente dental
+ALTER TABLE Empleados.Empleado WITH CHECK
+	ADD CONSTRAINT CHK_Empleados_Empleado$puestoEmpleado
+	CHECK (puesto IN('Recepcionista','Odontologo','Higienista dental','Ortodontologo','Asistente Dental'))
+GO
+
+-- El precio del tratamiento no puede ser menor que 0
+ALTER TABLE Pacientes.DetalleTratamiento WITH CHECK
+	ADD CONSTRAINT CHK_Pacientes_DetalleTratamiento$precioTratamiento
+	CHECK (precio >0)
+GO
+
+-- La fecha de cita no puede ser menor que la fecha actual
+ALTER TABLE Pacientes.Cita WITH CHECK
+	ADD CONSTRAINT CHK_Pacientes_Cita$VerificarFechaCita
+	CHECK (fechaCita >= GETDATE())
+GO
 
 -- El sexo es: Masculino, Femenino.
 ALTER TABLE Pacientes.Paciente WITH CHECK
@@ -181,6 +190,6 @@ GO
 -- Ingresar datos
 
 insert into Empleados.Usuario
-values ('Heimy Daniela Garcia Giron','Daniela22','holamundo',1)
+values ('Heimy Daniela Garcia Giron','Daniela22','holamundo',1,'Administrador')
 
 select * from Empleados.Usuario
