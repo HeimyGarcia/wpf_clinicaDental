@@ -19,9 +19,216 @@ namespace Clinica_Dental
     /// </summary>
     public partial class Empleado : Window
     {
+        private Empleados empleado = new Empleados();
+        private List<Empleados> empleados;
         public Empleado()
         {
             InitializeComponent();
+            cmbSexo.ItemsSource = Enum.GetValues(typeof(Genero));
+            cmbEstado.ItemsSource = Enum.GetValues(typeof(EstadoEmpleado));
+            cmbPuesto.ItemsSource = Enum.GetValues(typeof(Puesto));
+            ObtenerEmpleado();
+        }
+        private void ObtenerEmpleado()
+        {
+            empleados = empleado.MostrarEmpleado();
+            dgvEmpleado.ItemsSource = empleados;
+        }
+
+        private void LimpiarFormulario()
+        {
+            txtIdentidad.Text = string.Empty;
+            txtNombre.Text = string.Empty;
+            txtApellido.Text = string.Empty;
+            txtDireccion.Text = string.Empty;
+            txtCorreo.Text = string.Empty;
+            txtCelular.Text = string.Empty;
+            cmbEstado.SelectedValue = null;
+            cmbPuesto.SelectedValue = null;
+            cmbSexo.SelectedValue = null;
+        }
+
+        private void ObtenerValoresFormulario()
+        {
+            empleado.Identidad = txtIdentidad.Text;
+            empleado.Nombres = txtNombre.Text;
+            empleado.Apellidos = txtApellido.Text;
+            empleado.Direccion = txtDireccion.Text;
+            empleado.Correo = txtCorreo.Text;
+            empleado.Celular = txtCelular.Text;
+            empleado.SexoEmpleado = (Genero)cmbSexo.SelectedValue;
+            empleado.EstadoEmpleado = (EstadoEmpleado)cmbEstado.SelectedValue;
+            empleado.PuestoEmpleado = (Puesto)cmbPuesto.SelectedValue;
+        }
+        private void Inhabilitar()
+        {
+            txtIdentidad.IsEnabled = false;
+            btnAgregar.IsEnabled = false;
+        }
+        private void Habilitar()
+        {
+            txtIdentidad.IsEnabled = true;
+            btnAgregar.IsEnabled = true;
+        }
+        private void ValoresFormularioDesdeObjeto()
+        {
+            txtIdentidad.Text = empleado.Identidad;
+            txtNombre.Text = empleado.Nombres;
+            txtApellido.Text = empleado.Apellidos;
+            txtDireccion.Text = empleado.Direccion;
+            txtCorreo.Text = empleado.Correo;
+            txtCelular.Text = empleado.Celular;
+            cmbSexo.SelectedValue = empleado.SexoEmpleado;
+            cmbEstado.SelectedValue = empleado.EstadoEmpleado;
+            cmbPuesto.SelectedValue = empleado.PuestoEmpleado;
+        }
+        private bool VerificarValores()
+        {
+            if (txtIdentidad.Text == string.Empty || txtNombre.Text == string.Empty ||
+                txtApellido.Text == string.Empty || txtDireccion.Text == string.Empty ||
+                txtCorreo.Text == string.Empty || txtCelular.Text == string.Empty)
+            {
+                MessageBox.Show("Por favor ingresa todos los valores en las cajas de texto");
+                return false;
+            }
+            else if (cmbSexo.SelectedValue == null)
+            {
+                MessageBox.Show("Por favor selecciona el sexo");
+                return false;
+            }
+            else if (cmbEstado.SelectedValue == null)
+            {
+                MessageBox.Show("Por favor selecciona el estado del empleado");
+                return false;
+            }
+            else if (cmbPuesto.SelectedValue == null)
+            {
+                MessageBox.Show("Por favor selecciona el puesto del empleado");
+                return false;
+            }
+            return true;
+        }
+        private void btnAgregar_Click(object sender, RoutedEventArgs e)
+        {
+            // Verificar que se ingresaron los valores requeridos
+            if (VerificarValores())
+            {
+                try
+                {
+                    // Obtener los valores para el empleado
+                    ObtenerValoresFormulario();
+
+                    // Insertar los datos del empleado
+                    empleado.AgregarEmpleado(empleado);
+
+                    // Mensaje de inserción exitosa
+                    MessageBox.Show("¡Datos insertados correctamente!");
+
+                }
+                catch (Exception ex)
+                {
+                    //MessageBox.Show("Ha ocurrido un error al momento de insertar al paciente...");
+                    //Console.WriteLine(ex.Message)
+                    throw ex;
+                }
+                finally
+                {
+                    LimpiarFormulario();
+                    ObtenerEmpleado();
+                }
+            }
+        }
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
+        private void dgvEmpleado_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            Empleados empleadoSeleccionado = dgvEmpleado.SelectedItem as Empleados;
+            empleado = empleado.BuscarPersona(empleadoSeleccionado.Identidad);
+
+            ValoresFormularioDesdeObjeto();
+            Inhabilitar();
+        }
+        private void btnModificar_Click(object sender, RoutedEventArgs e)
+        {
+            if (dgvEmpleado.SelectedValue == null)
+                MessageBox.Show("Por favor selecciona un estado desde el listado");
+            else
+            {
+                if (VerificarValores())
+                {
+                    try
+                    {
+                        // Obtener los valores para la habitación desde el formulario
+                        ObtenerValoresFormulario();
+
+                        // Mostrar un mensaje de confirmación
+                        MessageBoxResult result = MessageBox.Show("¿Deseas modificar el empleado?", "Confirmar", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+
+                        if (result == MessageBoxResult.Yes)
+                        {
+                            // Modificar empleado
+                            empleado.ModificarEmpleado(empleado);
+
+                            // Mensaje de actualización realizada
+                            MessageBox.Show("¡Empleado modificado correctamente!");
+                        }
+
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Ha ocurrido un error al momento de modificar al empleado...");
+                        MessageBox.Show(ex.Message);
+                    }
+                    finally
+                    {
+                        // Actualizar los empleados
+                        ObtenerEmpleado();
+
+                        LimpiarFormulario();
+                        Habilitar();
+                    }
+                }
+            }
+        }
+        private void btnBuscar_Click(object sender, RoutedEventArgs e)
+        {
+            empleado = empleado.BuscarPersona(txtIdentidad.Text);
+
+            ValoresFormularioDesdeObjeto();
+        }
+        private void btnEliminar_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (dgvEmpleado.SelectedValue == null)
+                    MessageBox.Show("Por favor selecciona un paciente desde el listado");
+                else
+                {
+                    // Mostrar un mensaje de confirmación
+                    MessageBoxResult result = MessageBox.Show("¿Deseas eliminar al empleado?", "Confirmar", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+
+                    if (result == MessageBoxResult.Yes)
+                    {
+                        // Eliminar un empleado
+                        empleado.EliminarEmpleado(txtIdentidad.Text);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ha ocurrido un error al momento de eliminar al empleado...");
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                // Actualizar los empleados
+               ObtenerEmpleado();
+
+                LimpiarFormulario();
+                Habilitar();
+            }
         }
     }
 }
