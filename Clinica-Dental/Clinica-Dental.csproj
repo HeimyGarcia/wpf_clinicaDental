@@ -90,6 +90,9 @@
       <DependentUpon>Empleado.xaml</DependentUpon>
     </Compile>
     <Compile Include="Empleados.cs" />
+    <Compile Include="historialClinico.xaml.cs">
+      <DependentUpon>historialClinico.xaml</DependentUpon>
+    </Compile>
     <Compile Include="menuPrincipal.xaml.cs">
       <DependentUpon>menuPrincipal.xaml</DependentUpon>
     </Compile>
@@ -106,6 +109,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Empleado.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="historialClinico.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
