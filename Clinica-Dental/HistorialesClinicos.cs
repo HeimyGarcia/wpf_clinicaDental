@@ -121,7 +121,7 @@ namespace Clinica_Dental
         /// Muestra todas las consultas
         /// </summary>
         /// <returns>Un listado de las consultas</returns>
-        public List<HistorialesClinicos> MostrarHistorialClinico()
+        public List<HistorialesClinicos> MostrarHistorialClinico(string identidadPaciente)
         {
             // Inicializar una lista vacía de habitaciones
             List<HistorialesClinicos> consultas = new List<HistorialesClinicos>();
@@ -129,13 +129,16 @@ namespace Clinica_Dental
             try
             {
                 // Query de selección
-                string query = @"SELECT * FROM Pacientes.HistorialClinico";
+                string query = @"SELECT * FROM Pacientes.HistorialClinico WHERE identidadPaciente = @identidadPaciente";
 
                 // Establecer la conexión
                 sqlConnection.Open();
 
                 // Crear el comando SQL
                 SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+
+                // Establecer el valor del parámetro
+                sqlCommand.Parameters.AddWithValue("@identidadPaciente", identidadPaciente);
 
                 // Obtener los datos de las de la consulta
                 using (SqlDataReader rdr = sqlCommand.ExecuteReader())
@@ -172,7 +175,7 @@ namespace Clinica_Dental
         /// </summary>
         /// <param name="idHistorialClinico">El idHistorialConsulta del HistorialConsulta</param>
         /// <returns>Los datos del HistorialConsulta</returns>
-        public HistorialesClinicos BuscarHistorialClinico(int idHistorialClinico)
+        public HistorialesClinicos BuscarHistorialClinico(string identidadPaciente)
         {
             HistorialesClinicos elhistorialClinico = new HistorialesClinicos();
 
@@ -180,7 +183,7 @@ namespace Clinica_Dental
             {
                 // Query de búsqueda
                 string query = @"SELECT * FROM Pacientes.HistorialClinico
-                                 WHERE idHistorialClinico = @idHistorialClinico";
+                                 WHERE identidadPaciente = @identidadPaciente";
 
                 // Establecer la conexión
                 sqlConnection.Open();
@@ -189,7 +192,7 @@ namespace Clinica_Dental
                 SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
 
                 // Establecer el valor del parámetro
-                sqlCommand.Parameters.AddWithValue("@idHistorialClinico", idHistorialClinico);
+                sqlCommand.Parameters.AddWithValue("@identidadPaciente", identidadPaciente);
 
                 using (SqlDataReader rdr = sqlCommand.ExecuteReader())
                 {

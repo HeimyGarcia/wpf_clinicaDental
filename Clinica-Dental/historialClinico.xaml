@@ -57,7 +57,7 @@
         <Image Source="/Imagenes/LogoMedicDentalSystem.jpeg.jpeg" Grid.Row="1" Grid.Column="1" Stretch="Uniform" Margin="10 0 0 10" HorizontalAlignment="Right"/>
 
         <TextBox Name="txtHistorialClinico" Grid.Row="3" Grid.Column="0"  Margin="10 4 4 4" Background="LightGray"/>
-        <TextBox Name="txtIdentidadPaciente" Grid.Row="3" Grid.Column="1"  Margin="4 4" Background="LightGray"/>
+        <TextBox Name="txtIdentidadPaciente" Grid.Row="3" Grid.Column="1"  Margin="4 4" IsEnabled="False" Background="LightGray"/>
 
 
         <TextBox Name="txtObservaciones" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="4" Margin="10 4 4 4" Background="LightGray"/>
@@ -66,14 +66,10 @@
         <Button Name="btnAgregar" Content="Agregar" Grid.Row="3" Grid.Column="4" Margin="10 4" Click="btnAgregar_Click" />
         <Button Name="btnModificar" Content="Modificar" Grid.Row="5" Grid.Column="4" Margin="10 4" Click="btnModificar_Click" />
         <Button Name="btnEliminar" Content="Eliminar" Grid.Row="6" Grid.Column="4" Margin="10 4" Click="btnEliminar_Click" />
-        <Button Style="{DynamicResource MaterialDesignRaisedAccentButton}" Name="btnBuscar" Content="Buscar" Grid.Row="7" Grid.Column="2" Margin="4 4" Click="btnBuscar_Click" />
         <Button Style="{DynamicResource MaterialDesignFlatLightBgButton}" Name="btnCita" Content="Cita" Grid.Row="7" Grid.Column="3" Margin="10 4" Click="btnCita_Click" />
         <Button Style="{DynamicResource MaterialDesignFlatLightBgButton}" Name="btnConsulta" Content="Consulta" Grid.Row="7" Grid.Column="4" Margin="10 4" Click="btnConsulta_Click" />
 
-        <StackPanel Orientation="Horizontal" Margin="10 4" Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2">
-            <materialDesign:PackIcon Kind="Search" Foreground="{Binding ElementName=txtPaciente, Path=BorderBrush}" VerticalAlignment="Bottom" Margin="0 4"/>
-            <TextBox x:Name="txtHistorial" Width="300" materialDesign:HintAssist.Hint="Historial Clinico" materialDesign:HintAssist.IsFloating="True"/>
-        </StackPanel>
+        
 
         <DatePicker Name="dtpFechaCreacion" Grid.Row="6" Grid.Column="1" Margin="4 4"/>
         <ComboBox Name="cmbEstado" Grid.Row ="6" Grid.Column="3" Margin="4 4" Background="LightGray"/>

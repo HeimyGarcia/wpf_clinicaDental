@@ -53,7 +53,7 @@ namespace Clinica_Dental
         }
         private void ObtenerHistorialClinico()
         {
-            historialClinicos = consulta.MostrarHistorialClinico();
+            historialClinicos = consulta.MostrarHistorialClinico(txtIdentidadPaciente.Text);
             dgvHistorialClinico.ItemsSource = historialClinicos;
 
         }
@@ -155,14 +155,26 @@ namespace Clinica_Dental
             {
                 try
                 {
-                    // Obtener los valores para el historial
-                    ObtenerValoresFormulario();
+                    consulta = consulta.BuscarHistorialClinico(txtIdentidadPaciente.Text);
 
-                    // Insertar los datos del historial
-                    consulta.CrearHistorialClinico(consulta);
+                    if (consulta.identidadPaciente != null)
+                    {
+                        // Obtener los valores para el historial
+                        ObtenerValoresFormulario();
 
-                    // Mensaje de inserción exitosa
-                    MessageBox.Show("¡Datos insertados correctamente!");
+                        // Insertar los datos del historial
+                        consulta.CrearHistorialClinico(consulta);
+
+                        // Mensaje de inserción exitosa
+                        MessageBox.Show("¡Datos insertados correctamente!");
+                        LimpiarFormulario();
+
+                    }
+                    else
+                    {
+                        MessageBox.Show("Ya cuenta con un historial clínico");
+                        ValoresFormularioDesdeObjeto();
+                    }
 
                 }
                 catch (Exception ex)
@@ -173,9 +185,10 @@ namespace Clinica_Dental
                 }
                 finally
                 {
-                    LimpiarFormulario();
+
                     ObtenerHistorialClinico();
                 }
+
             }
 
         }
@@ -224,14 +237,6 @@ namespace Clinica_Dental
 
         }
 
-        private void btnBuscar_Click(object sender, RoutedEventArgs e)
-        {
-            consulta = consulta.BuscarHistorialClinico(Convert.ToInt32(txtHistorial.Text));
-
-            ValoresFormularioDesdeObjeto();
-
-        }
-
         private void btnCita_Click(object sender, RoutedEventArgs e)
         {
 
@@ -240,7 +245,7 @@ namespace Clinica_Dental
         private void dgvHistorialClinico_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             HistorialesClinicos HistorialSelecionado = dgvHistorialClinico.SelectedItem as HistorialesClinicos;
-            consulta = consulta.BuscarHistorialClinico(HistorialSelecionado.IdHistorialClinico);
+            consulta = consulta.BuscarHistorialClinico(HistorialSelecionado.identidadPaciente);
 
             ValoresFormularioDesdeObjeto();
             Inhabilitar();
