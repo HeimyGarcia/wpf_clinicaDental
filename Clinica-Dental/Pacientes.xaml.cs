@@ -241,5 +241,31 @@ namespace Clinica_Dental
             ValoresFormularioDesdeObjeto();
             Inhabilitar();
         }
+
+        private void btnHistorial_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                // Implementar la búsqueda del paciente desde la clase Paciente
+                Paciente elPaciente = paciente.BuscarPersona(txtIdentidad.Text);
+
+                // Verificar si el paciente existe
+                if (elPaciente.Identidad == null)
+                    MessageBox.Show("El paciente no ha sido seleccionado. Favor verificar.");
+                else
+                {
+                    historialClinico elhistorialclinico = new historialClinico(elPaciente.Identidad);
+
+                    elhistorialclinico.Show();
+
+                    Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                Console.WriteLine(ex.Message);
+            }
+        }
     }
 }

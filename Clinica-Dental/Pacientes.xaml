@@ -69,7 +69,7 @@
         <Button Name="btnModificar" Content="Modificar" Grid.Row="5" Grid.Column="4" Margin="10 4" Click="btnModificar_Click" />
         <Button Name="btnEliminar" Content="Eliminar" Grid.Row="6" Grid.Column="4" Margin="10 4" Click="btnEliminar_Click" />
         <Button Style="{DynamicResource MaterialDesignRaisedAccentButton}" Name="btnBuscar" Content="Buscar" Grid.Row="8" Grid.Column="2" Margin="4 4" Click="btnBuscar_Click" />
-        <Button Style="{DynamicResource MaterialDesignFlatLightBgButton}" Name="btnHistorial" Content="Historial Clínico" Grid.Row="8" Grid.Column="3" Grid.ColumnSpan="2" Margin="50 4" />
+        <Button Style="{DynamicResource MaterialDesignFlatLightBgButton}" Name="btnHistorial" Content="Historial Clínico" Grid.Row="8" Grid.Column="3" Grid.ColumnSpan="2" Margin="50 4" Click="btnHistorial_Click" />
 
         <StackPanel Orientation="Horizontal" Margin="10 4" Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="2">
             <materialDesign:PackIcon Kind="Search" Foreground="{Binding ElementName=txtPaciente, Path=BorderBrush}" VerticalAlignment="Bottom" Margin="0 4"/>
