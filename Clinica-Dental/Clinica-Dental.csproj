@@ -93,6 +93,7 @@
     <Compile Include="historialClinico.xaml.cs">
       <DependentUpon>historialClinico.xaml</DependentUpon>
     </Compile>
+    <Compile Include="HistorialesClinicos.cs" />
     <Compile Include="menuPrincipal.xaml.cs">
       <DependentUpon>menuPrincipal.xaml</DependentUpon>
     </Compile>
