@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
 // Agregar los namespaces de conexión con SQL Server
 using System.Data.SqlClient;
 using System.Configuration;
 using System.Globalization;
-
 
 namespace Clinica_Dental
 {
@@ -32,7 +32,7 @@ namespace Clinica_Dental
     public class Empleados
     {
         // Variables miembro
-        public  static string connectionString = ConfigurationManager.ConnectionStrings["Clinica_Dental.Properties.Settings.ClinicaDentalConnectionString"].ConnectionString;
+        public static string connectionString = ConfigurationManager.ConnectionStrings["Clinica_Dental.Properties.Settings.ClinicaDentalConnectionString"].ConnectionString;
         public SqlConnection sqlConnection = new SqlConnection(connectionString);
 
         public string Identidad { get; set; }
@@ -102,6 +102,7 @@ namespace Clinica_Dental
                     return "Recepcionista";
             }
         }
+
         public void AgregarEmpleado(Empleados empleados)
         {
             try
@@ -176,7 +177,7 @@ namespace Clinica_Dental
                             SexoEmpleado = (Genero)Convert.ToChar(rdr["sexo"].ToString().Substring(0, 1)),
                             EstadoEmpleado = (EstadoEmpleado)Convert.ToChar(rdr["estado"].ToString().Substring(0, 1)),
                             PuestoEmpleado = (Puesto)Convert.ToChar(rdr["puesto"].ToString().Substring(0, 1))
-                        }) ;
+                        });
                     }
                 }
                 return empleado;
@@ -216,7 +217,7 @@ namespace Clinica_Dental
                 sqlCommand.Parameters.AddWithValue("@direccion", empleados.Direccion);
                 sqlCommand.Parameters.AddWithValue("@correoElectronico", empleados.Correo);
                 sqlCommand.Parameters.AddWithValue("@celular", empleados.Celular);
-                
+
                 sqlCommand.Parameters.AddWithValue("@sexo", ObtenerSexo(empleados.SexoEmpleado));
                 sqlCommand.Parameters.AddWithValue("@estado", ObtenerEstado(empleados.EstadoEmpleado));
                 sqlCommand.Parameters.AddWithValue("@puesto", ObtenerPuesto(empleados.PuestoEmpleado));
@@ -314,6 +315,5 @@ namespace Clinica_Dental
             }
         }
     }
-
 }
 
