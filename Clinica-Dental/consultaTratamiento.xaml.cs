@@ -54,8 +54,7 @@ namespace Clinica_Dental
             SqlDataReader rdr = command.ExecuteReader();
             while (rdr.Read())
             {
-                cmbTratamiento.Items.Add(rdr["nombreTratamiento"].ToString());
-
+                cmbTratamiento.Items.Add(rdr["idTratamiento"].ToString());
             }
             sqlConnection.Close();
 
@@ -243,6 +242,11 @@ namespace Clinica_Dental
             ValoresFormularioDesdeObjeto();
         }
 
+        private void btnDetalleTratamiento_Click(object sender, RoutedEventArgs e)
+        {
+            detalleTratamiento detalletratamiento = new detalleTratamiento();
+            detalletratamiento.Show();
+        }
     }
 }
 
