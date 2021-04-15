@@ -116,6 +116,7 @@
     <Compile Include="usuario.xaml.cs">
       <DependentUpon>usuario.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Usuarios.cs" />
     <Page Include="cita.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
