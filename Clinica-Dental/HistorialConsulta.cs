@@ -168,11 +168,61 @@ namespace Clinica_Dental
         }
 
         /// <summary>
+        /// Obtiene un detalle por su idHistorialClinico
+        /// </summary>
+        /// <param name="idHistorialClinico">El idHistorialConsulta del HistorialConsulta</param>
+        /// <returns>Los datos del HistorialConsulta</returns>
+        public HistorialConsulta BuscarHistorialConsulta(int idHistorialClinico)
+        {
+            HistorialConsulta elhistorialConsulta = new HistorialConsulta();
+
+            try
+            {
+                // Query de búsqueda
+                string query = @"SELECT * FROM Pacientes.HistorialConsulta
+                                 WHERE idHistorialClinico = @idHistorialClinico";
+
+                // Establecer la conexión
+                sqlConnection.Open();
+
+                // Crear el comando SQL
+                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+
+                // Establecer el valor del parámetro
+                sqlCommand.Parameters.AddWithValue("@idHistorialClinico", idHistorialClinico);
+
+                using (SqlDataReader rdr = sqlCommand.ExecuteReader())
+                {
+                    while (rdr.Read())
+                    {
+                        elhistorialConsulta.IdHistorialConsulta = Convert.ToInt32(rdr["idHistorialConsulta"]);
+                        elhistorialConsulta.IdHistorialClinico = Convert.ToInt32(rdr["idHistorialClinico"]);
+                        elhistorialConsulta.IdentidadEmpleado = rdr["identidadEmpleado"].ToString();
+                        elhistorialConsulta.MotivoConsulta = rdr["motivoConsulta"].ToString();
+                        elhistorialConsulta.Observaciones = rdr["observaciones"].ToString();
+                        elhistorialConsulta.Estado = (estadoHistorial)Convert.ToInt32((rdr["estado"])); //probar
+                    }
+                }
+
+                return elhistorialConsulta;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            finally
+            {
+                // Cerrar la conexión
+                sqlConnection.Close();
+            }
+        }
+
+        // <summary>
         /// Obtiene un detalle por su idHistorialConsulta
         /// </summary>
         /// <param name="idHistorialConsulta">El idHistorialConsulta del HistorialConsulta</param>
         /// <returns>Los datos del HistorialConsulta</returns>
-        public HistorialConsulta BuscarHistorialConsulta(int idHistorialConsulta)
+        public HistorialConsulta BuscarHistorialConsulta2(int idHistorialConsulta)
         {
             HistorialConsulta elhistorialConsulta = new HistorialConsulta();
 
@@ -216,7 +266,6 @@ namespace Clinica_Dental
                 sqlConnection.Close();
             }
         }
-
         /// <summary>
         /// Modifica los datos de la consulta
         /// </summary>
