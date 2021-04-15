@@ -217,6 +217,54 @@ namespace Clinica_Dental
                 sqlConnection.Close();
             }
         }
+        /// <summary>
+        /// Obtiene un detalle por su idHistorialclinico
+        /// </summary>
+        /// <param name="idHistorialClinico">El idHistorialClinico del HistorialClinico</param>
+        /// <returns>Los datos del HistorialConsulta</returns>
+        public HistorialesClinicos BuscarHistorialClinico2(int idHistorialClinico)
+        {
+            HistorialesClinicos elhistorialClinico = new HistorialesClinicos();
+
+            try
+            {
+                // Query de búsqueda
+                string query = @"SELECT * FROM Pacientes.HistorialClinico
+                                 WHERE idHistorialClinico = @idHistorialClinico";
+
+                // Establecer la conexión
+                sqlConnection.Open();
+
+                // Crear el comando SQL
+                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+
+                // Establecer el valor del parámetro
+                sqlCommand.Parameters.AddWithValue("@idHistorialClinico", idHistorialClinico);
+
+                using (SqlDataReader rdr = sqlCommand.ExecuteReader())
+                {
+                    while (rdr.Read())
+                    {
+                        elhistorialClinico.IdHistorialClinico = Convert.ToInt32(rdr["idHistorialClinico"]);
+                        elhistorialClinico.identidadPaciente = rdr["identidadPaciente"].ToString();
+                        elhistorialClinico.Afecciones = rdr["afecciones"].ToString();
+                        elhistorialClinico.Observaciones = rdr["observaciones"].ToString();
+                        elhistorialClinico.Estado = (estadoClinico)Convert.ToInt32((rdr["estado"])); //probar
+                    }
+                }
+
+                return elhistorialClinico;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            finally
+            {
+                // Cerrar la conexión
+                sqlConnection.Close();
+            }
+        }
 
         /// <summary>
         /// Modifica los datos del historial
