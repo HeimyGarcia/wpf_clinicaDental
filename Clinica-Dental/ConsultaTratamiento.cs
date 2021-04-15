@@ -179,7 +179,7 @@ namespace Clinica_Dental
                     while (rdr.Read())
                     {
                         elTratamiento.IdTratamiento = Convert.ToInt32(rdr["idTratamiento"]);
-                        elTratamiento.IdTratamiento = Convert.ToInt32(rdr["idHistorialConsulta"]);
+                        elTratamiento.IdHistorialConsulta = Convert.ToInt32(rdr["idHistorialConsulta"]);
                         elTratamiento.Estado = (estadoConsultaTratamiento)Convert.ToInt32((rdr["estado"])); //probar
                     }
                 }
