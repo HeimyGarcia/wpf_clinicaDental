@@ -96,6 +96,10 @@
     <Compile Include="historialClinico.xaml.cs">
       <DependentUpon>historialClinico.xaml</DependentUpon>
     </Compile>
+    <Compile Include="HistorialConsulta.cs" />
+    <Compile Include="historialConsulta.xaml.cs">
+      <DependentUpon>historialConsulta.xaml</DependentUpon>
+    </Compile>
     <Compile Include="HistorialesClinicos.cs" />
     <Compile Include="menuPrincipal.xaml.cs">
       <DependentUpon>menuPrincipal.xaml</DependentUpon>
@@ -121,6 +125,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="historialClinico.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="historialConsulta.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

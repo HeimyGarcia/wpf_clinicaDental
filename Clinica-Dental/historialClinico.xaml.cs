@@ -258,6 +258,28 @@ namespace Clinica_Dental
 
         private void btnConsulta_Click(object sender, RoutedEventArgs e)
         {
+            try
+            {
+                // Implementar la búsqueda del historiallinico desde la clase HistorialClinico
+                HistorialesClinicos loshistorialesClinicos = consulta.BuscarHistorialClinico2(Convert.ToInt32(txtHistorialClinico.Text));
+
+                // Verificar si el paciente existe
+                if (Convert.ToInt32(loshistorialesClinicos.IdHistorialClinico).ToString() == null)
+                    MessageBox.Show("El historialClinico no ha sido seleccionado. Favor verificar.");
+                else
+                {
+                    historialConsulta historialConsultas = new historialConsulta(Convert.ToInt32(loshistorialesClinicos.IdHistorialClinico));
+
+                    historialConsultas.Show();
+
+                    Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                Console.WriteLine(ex.Message);
+            }
 
         }
     }
