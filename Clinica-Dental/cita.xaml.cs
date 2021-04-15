@@ -23,12 +23,13 @@ namespace Clinica_Dental
         private Citas citas = new Citas();
         private List<Citas> lascitas;
 
-        public cita()
+        public cita(int idCita)
         {
             InitializeComponent();
 
             // Llenar el combobox de estado
             cmbEstado.ItemsSource = Enum.GetValues(typeof(EstadoCita));
+            txtIdCita.Text = idCita.ToString();
 
             ObtenerCitas();
         }
@@ -58,6 +59,14 @@ namespace Clinica_Dental
             citas.Hora = tmpHora.SelectedTime.Value;
             citas.EstadoCita = (EstadoCita)cmbEstado.SelectedItem;
 
+        }
+
+        public bool VerificarHora()
+        {
+            if (citas.Hora.Hour >= 8 && citas.Hora.Hour <= 4)
+                return true;
+
+            return false;
         }
 
         private void Inhabilitar()
@@ -110,14 +119,19 @@ namespace Clinica_Dental
             {
                 try
                 {
-                    // Obtener los valores para la cita
-                    ObtenerValoresFormulario();
+                    if (VerificarHora())
+                    {
+                        // Obtener los valores para la cita
+                        ObtenerValoresFormulario();
 
-                    // Insertar los datos de la cita
-                    citas.AgregarCita(citas);
+                        // Insertar los datos de la cita
+                        citas.AgregarCita(citas);
 
-                    // Mensaje de inserción exitosa
-                    MessageBox.Show("¡Datos insertados correctamente!");
+                        // Mensaje de inserción exitosa
+                        MessageBox.Show("¡Datos insertados correctamente!");
+                    }else
+                        MessageBox.Show("¡La hora de la cita debe estar compredida entre las 8:00 AM hasta 4:00 PM!");
+
 
                 }
                 catch (Exception ex)
