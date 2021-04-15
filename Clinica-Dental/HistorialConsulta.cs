@@ -125,13 +125,16 @@ namespace Clinica_Dental
             try
             {
                 // Query de selección
-                string query = @"SELECT * FROM Pacientes.HistorialConsulta";
+                string query = @"SELECT * FROM Pacientes.HistorialConsulta WHERE idHistorialClinico= @idHistorialClinico";
 
                 // Establecer la conexión
                 sqlConnection.Open();
 
                 // Crear el comando SQL
                 SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+
+                // Establecer el valor del parámetro
+                sqlCommand.Parameters.AddWithValue("@idHistorialClinico", IdHistorialClinico);
 
                 // Obtener los datos de las de la consulta
                 using (SqlDataReader rdr = sqlCommand.ExecuteReader())
