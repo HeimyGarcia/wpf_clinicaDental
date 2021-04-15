@@ -58,7 +58,7 @@
 
         <TextBox Name="txtIdCita" Grid.Row="3" Grid.Column="0"  Margin="10 4 4 4" Background="LightGray"/>
         <TextBox Name="txtIdHistorialClinico" Grid.Row="3" Grid.Column="1"  Margin="4 4" Background="LightGray"/>
-        <materialDesign:TimePicker Name="txtHora" Grid.Row="6" Grid.Column="3"  Margin="4 4" Background="LightGray"/>
+        <materialDesign:TimePicker Name="tmpHora" Grid.Row="6" Grid.Column="3"  Margin="4 4" Background="LightGray"/>
 
         <TextBox Name="txtNota" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="3" Margin="10 4 4 4" Background="LightGray"/>
 
