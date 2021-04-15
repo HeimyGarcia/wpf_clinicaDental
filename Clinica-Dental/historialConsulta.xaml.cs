@@ -40,10 +40,11 @@ namespace Clinica_Dental
             // Llenar el combobox de estado
             cmbEstado.ItemsSource = Enum.GetValues(typeof(estadoHistorial));
             txtHistorialClinico.Text = Convert.ToInt32(idHistorialClinico).ToString();
-            // Llenar el listbox de DetalleTratamiento
-            ObtenerHistorialConsulta();
             //Llenar el combobox de Empleado
             ObtenerListaEmpleado();
+            // Llenar el listbox de DetalleTratamiento
+            ObtenerHistorialConsulta();
+            
         }
         private void ObtenerListaEmpleado()
         {
@@ -162,7 +163,7 @@ namespace Clinica_Dental
         private void dgvDetalleTratamiento_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             HistorialConsulta tratamientoSelecionado = dgvHistorialConsulta.SelectedItem as HistorialConsulta;
-            consulta = consulta.BuscarHistorialConsulta(tratamientoSelecionado.IdHistorialConsulta);
+            consulta = consulta.BuscarHistorialConsulta(tratamientoSelecionado.IdHistorialClinico);
 
             ValoresFormularioDesdeObjeto();
             Inhabilitar();
