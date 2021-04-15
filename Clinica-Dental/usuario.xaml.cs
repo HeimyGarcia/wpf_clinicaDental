@@ -118,10 +118,86 @@ namespace Clinica_Dental
         private void dgvUsuario_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             Usuarios usuarioSeleccionado = dgvUsuario.SelectedItem as Usuarios;
-            usuarios = usuarios.BuscarUsuario(usuarioSeleccionado.Id);
+            usuarios = usuarios.BuscarUsuario(usuarioSeleccionado.NombreCompleto);
 
             ObtenerValoresDesdeObjeto();
            
+        }
+
+        private void btnModificar_Click(object sender, RoutedEventArgs e)
+        {
+            if (dgvUsuario.SelectedValue == null)
+                MessageBox.Show("Por favor selecciona un usuario  desde el listado");
+            else
+            {
+                if (VerificarDatos())
+                {
+                    try
+                    {
+                        ObtenerValoresFormulario();
+                        MessageBoxResult result = MessageBox.Show("¿Deseas modificar el usuario?", "Confirmar", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+                        if (result == MessageBoxResult.Yes)
+                        {
+                            // Modificar empleado
+                            usuarios.ModificarUsuario(usuarios);
+
+                            // Mensaje de actualización realizada
+                            MessageBox.Show("¡Usuario modificado correctamente!");
+                        }
+
+                    }
+                    catch (Exception ex)
+                    {
+
+                        MessageBox.Show("Ha ocurrido un error al momento de modificar al usuario...");
+                        MessageBox.Show(ex.Message);
+                    }
+                    finally
+                    {
+                        ObtenerUsuario();
+
+                        LimpiarFormulario();
+                    }
+
+                }
+            }
+        }
+        private void btnBuscar_Click(object sender, RoutedEventArgs e)
+        {
+            usuarios = usuarios.BuscarUsuario(txtNombre.Text);
+
+            ObtenerValoresDesdeObjeto();
+        }
+        private void btnEliminar_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (dgvUsuario.SelectedValue == null)
+                    MessageBox.Show("Por favor selecciona un usuario desde el listado");
+                else
+                {
+                    // Mostrar un mensaje de confirmación
+                    MessageBoxResult result = MessageBox.Show("¿Deseas eliminar al usuario?", "Confirmar", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+
+                    if (result == MessageBoxResult.Yes)
+                    {
+                        // Eliminar un empleado
+                        usuarios.EliminarUsuario(txtNombre.Text);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show("Ha ocurrido un error al momento de eliminar al usuario...");
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                ObtenerUsuario();
+
+                LimpiarFormulario();
+            }
         }
     }
 }
