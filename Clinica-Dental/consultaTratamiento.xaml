@@ -68,7 +68,7 @@
         <ComboBox Name="cmbEstado" Grid.Row ="4" Grid.Column="2" Margin="4.4,4.2,4,3.8" Background="LightGray" Height="32"/>
 
 
-        <DataGrid x:Name="dgvTratamiento" Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="6" Margin="10 10" Background="LightBlue" MouseDoubleClick="dgvDetalleTratamiento_MouseDoubleClick" />
+        <DataGrid x:Name="dgvTratamiento" Grid.Row="8" Grid.Column="0" IsReadOnly="True" Grid.ColumnSpan="6" Margin="10 10" Background="LightBlue" MouseDoubleClick="dgvDetalleTratamiento_MouseDoubleClick" />
 
     </Grid>
 </Window>
