@@ -35,11 +35,12 @@ namespace Clinica_Dental
 
         private DetalleTratamiento detalleTratamiento = new DetalleTratamiento();
         private List<DetalleTratamiento> detalleTratamientos = new List<DetalleTratamiento>();
-        public consultaTratamiento()
+        public consultaTratamiento(int idHistorialConsulta)
         {
             InitializeComponent();
             // Llenar el combobox de estado
             cmbEstado.ItemsSource = Enum.GetValues(typeof(estadoConsultaTratamiento));
+            txtDetalleConsulta.Text =Convert.ToInt32( idHistorialConsulta).ToString();
             // Llenar el listbox de Tratamiento
             ObtenerTratamiento();
             //Llenar el combobox de detalleTratamiento
@@ -48,13 +49,12 @@ namespace Clinica_Dental
 
         private void ObtenerListaDetalleTratamiento()
         {
-            SqlCommand command = new SqlCommand("Select nombreTratamiento from Pacientes.DetalleTratamiento", sqlConnection);
+            SqlCommand command = new SqlCommand("Select nombreTratamiento, idTratamiento from Pacientes.DetalleTratamiento", sqlConnection);
             sqlConnection.Open();
             SqlDataReader rdr = command.ExecuteReader();
             while (rdr.Read())
             {
-                cmbTratamiento.Items.Add(rdr["nombreTratamiento"].ToString());
-
+                cmbTratamiento.Items.Add(rdr["idTratamiento"].ToString());
             }
             sqlConnection.Close();
 
@@ -64,11 +64,11 @@ namespace Clinica_Dental
         {
             cmbEstado.Text = null;
             cmbTratamiento.Text = null;
-            txtConsulta.Text = string.Empty;
+            
         }
         private void ObtenerTratamiento()
         {
-            tratamientos = elTratamiento.MostrarTratamiento();
+            tratamientos = elTratamiento.MostrarTratamiento(Convert.ToInt32(txtDetalleConsulta.Text));
             dgvTratamiento.ItemsSource = tratamientos;
 
         }
@@ -76,7 +76,7 @@ namespace Clinica_Dental
         private void ObtenerValoresFormulario()
         {
             elTratamiento.IdTratamiento = Convert.ToInt32(cmbTratamiento.Text);
-            elTratamiento.IdHistorialConsulta = Convert.ToInt32(txtConsulta.Text);
+            elTratamiento.IdHistorialConsulta = Convert.ToInt32(txtDetalleConsulta.Text);
             elTratamiento.Estado = (estadoConsultaTratamiento)cmbEstado.SelectedItem;
         }
         private bool VerificarValores()
@@ -91,7 +91,7 @@ namespace Clinica_Dental
                 MessageBox.Show("Por favor selecciona el tratamiento");
                 return false;
             }
-            else if (txtConsulta.Text == string.Empty)
+            else if (txtDetalleConsulta.Text == string.Empty)
             {
                 MessageBox.Show("Por favor selecciona la consulta");
                 return false;
@@ -110,7 +110,7 @@ namespace Clinica_Dental
         private void ValoresFormularioDesdeObjeto()
         {
             cmbTratamiento.Text = Convert.ToInt32(elTratamiento.IdTratamiento).ToString();
-            txtConsulta.Text = Convert.ToInt32(elTratamiento.IdHistorialConsulta).ToString();
+            txtDetalleConsulta.Text = Convert.ToInt32(elTratamiento.IdHistorialConsulta).ToString();
             cmbEstado.SelectedValue = elTratamiento.Estado;
 
         }
@@ -237,11 +237,16 @@ namespace Clinica_Dental
 
         private void btnBuscar_Click(object sender, RoutedEventArgs e)
         {
-            elTratamiento = elTratamiento.BuscarTratamiento(Convert.ToInt32(txtTratamiento.Text), Convert.ToInt32(txtConsulta.Text));
+            elTratamiento = elTratamiento.BuscarTratamiento(Convert.ToInt32(txtTratamiento.Text), Convert.ToInt32(txtDetalleConsulta.Text));
 
             ValoresFormularioDesdeObjeto();
         }
 
+        private void btnDetalleTratamiento_Click(object sender, RoutedEventArgs e)
+        {
+            detalleTratamiento detalletratamiento = new detalleTratamiento();
+            detalletratamiento.Show();
+        }
     }
 }
 

@@ -104,7 +104,7 @@ namespace Clinica_Dental
         /// Muestra todos los Tratamiento
         /// </summary>
         /// <returns>Un listado de los Tratamiento</returns>
-        public List<ConsultaTratamiento> MostrarTratamiento()
+        public List<ConsultaTratamiento> MostrarTratamiento(int idHistorialConsulta)
         {
             // Inicializar una lista vacía de tratamientos
             List<ConsultaTratamiento> tratamientos = new List<ConsultaTratamiento>();
@@ -112,13 +112,15 @@ namespace Clinica_Dental
             try
             {
                 // Query de selección
-                string query = @"SELECT * FROM Pacientes.ConsultaTratamiento";
+                string query = @"SELECT * FROM Pacientes.ConsultaTratamiento WHERE idHistorialConsulta=@idHistorialConsulta";
 
                 // Establecer la conexión
                 sqlConnection.Open();
 
                 // Crear el comando SQL
                 SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+
+                sqlCommand.Parameters.AddWithValue("@idHistorialConsulta", idHistorialConsulta);
 
                 // Obtener los datos de las habitaciones
                 using (SqlDataReader rdr = sqlCommand.ExecuteReader())

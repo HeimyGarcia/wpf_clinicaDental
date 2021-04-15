@@ -46,7 +46,8 @@
         </Border>
 
         <Label Content="Historial Consulta" FontSize="25" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="6" Margin="0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-        <Label Content="Historial clinico" Grid.Row="2" Grid.Column="0" Margin="10 0" HorizontalAlignment="Center" Grid.ColumnSpan="2"/>
+        <Label Content="Historial clinico" Grid.Row="2" Grid.Column="1" Margin="10 0" HorizontalAlignment="Center"/>
+        <Label Content="Consulta" Grid.Row="2" Grid.Column="0" Margin="10 0" HorizontalAlignment="Center"/>
 
         <Label Content="Motivo consulta" Grid.Row="2" Grid.Column="2" Margin="10 0" HorizontalAlignment="Center" Grid.ColumnSpan="2"/>
         <Label Content="Observaciones" Grid.Row="4" Grid.Column="0" Margin="10 0" HorizontalAlignment="Center" Grid.ColumnSpan="2"/>
@@ -59,13 +60,14 @@
         <TextBox Name="txtMotivoConsulta" Grid.Row="3" Grid.Column="2"  Margin="4 4" Background="LightGray" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
         <TextBox Name="txtObservaciones" Grid.Row="5" Grid.Column="0"  Margin="4 4" Background="LightGray" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
 
-        <TextBox Name="txtHistorialClinico" Grid.Row ="3" Grid.Column="0" Margin="4 4" Background="LightGray" IsEnabled="False" Grid.ColumnSpan="2"/>
+        <TextBox Name="txtHistorialClinico" Grid.Row ="3" Grid.Column="1" Margin="4 4" Background="LightGray" IsEnabled="False"/>
+        <TextBox Name="txtConsulta" Grid.Row ="3" Grid.Column="0" Margin="4 4" Background="LightGray" IsEnabled="False"/>
         <ComboBox Name="cmbEmpleado" Grid.Row ="6" Grid.Column="2" Margin="4 4" Background="LightGray"/>
         <Button Name="btnAgregar" Content="Agregar" Grid.Row="3" Grid.Column="4" Margin="10 4" Click="btnAgregar_Click" />
         <Button Name="btnModificar" Content="Modificar" Grid.Row="5" Grid.Column="4" Margin="10 4" Click="btnModificar_Click"  />
         <Button Name="btnEliminar" Content="Eliminar" Grid.Row="6" Grid.Column="4" Margin="10 4" Click="btnEliminar_Click" />
         <Button Style="{DynamicResource MaterialDesignRaisedAccentButton}" Name="btnBuscar" Content="Buscar" Grid.Row="7" Grid.Column="2" Margin="4 4"  />
-        <Button Style="{DynamicResource MaterialDesignRaisedAccentButton}" Name="btnTratamiento" Content="Tratamiento" Grid.Row="7" Grid.Column="3" Margin="4 4" />
+        <Button Style="{DynamicResource MaterialDesignRaisedAccentButton}" Name="btnTratamiento" Content="Tratamiento" Grid.Row="7" Grid.Column="3" Margin="4 4" Click="btnTratamiento_Click" />
 
 
         <StackPanel Orientation="Horizontal" Margin="10 4" Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2">

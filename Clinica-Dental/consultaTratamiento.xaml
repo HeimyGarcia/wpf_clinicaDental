@@ -52,11 +52,11 @@
 
         <Image Source="/Imagenes/LogoMedicDentalSystem.jpeg.jpeg" Grid.Row="1" Grid.Column="1" Stretch="Uniform" Margin="10 0 0 10" HorizontalAlignment="Right"/>
 
-        <Button Name="btnAgregar" Content="Agregar" Grid.Row="4" Grid.Column="4" Margin="10 4" />
-        <Button Name="btnModificar" Content="Modificar" Grid.Row="5" Grid.Column="4" Margin="10 4"  />
-        <Button Name="btnEliminar" Content="Eliminar" Grid.Row="6" Grid.Column="4" Margin="10 4"  />
-        <Button Style="{DynamicResource MaterialDesignRaisedAccentButton}" Name="btnBuscar" Content="Buscar" Grid.Row="7" Grid.Column="2" Margin="4 4"  />
-        <Button Style="{DynamicResource MaterialDesignRaisedAccentButton}" Name="btnDetalleTratamiento" Content="DetalleTratamiento" Grid.Row="7" Grid.Column="3"  Margin="4,7.2,0.4,6.4" />
+        <Button Name="btnAgregar" Content="Agregar" Grid.Row="4" Grid.Column="4" Margin="10 4" Click="btnAgregar_Click"/>
+        <Button Name="btnModificar" Content="Modificar" Grid.Row="5" Grid.Column="4" Margin="10 4" Click="btnModificar_Click" />
+        <Button Name="btnEliminar" Content="Eliminar" Grid.Row="6" Grid.Column="4" Margin="10 4" Click="btnEliminar_Click"  />
+        <Button Style="{DynamicResource MaterialDesignRaisedAccentButton}" Name="btnBuscar" Content="Buscar" Grid.Row="7" Grid.Column="2" Margin="4 4" Click="btnBuscar_Click" />
+        <Button Style="{DynamicResource MaterialDesignRaisedAccentButton}" Name="btnDetalleTratamiento" Content="DetalleTratamiento" Grid.Row="7" Grid.Column="3"  Margin="4,7.2,0.4,6.4" Click="btnDetalleTratamiento_Click" />
 
         <StackPanel Orientation="Horizontal" Margin="10 4" Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2">
             <materialDesign:PackIcon Kind="Search" Foreground="{Binding ElementName=txtPaciente, Path=BorderBrush}" VerticalAlignment="Bottom" Margin="0 4"/>
@@ -64,12 +64,12 @@
             <TextBox x:Name="txtConsulta" Width="84" materialDesign:HintAssist.Hint="Consulta" materialDesign:HintAssist.IsFloating="True" Margin="0,0,0,-0.4"/>
         </StackPanel>
 
-        <TextBox Name="txtDetalleTratamiento" Grid.Row ="4" Grid.Column="1" Margin="4 4" Background="LightGray" IsEnabled="False"/>
+        <TextBox Name="txtDetalleConsulta" Grid.Row ="4" Grid.Column="1" Margin="4 4" Background="LightGray" IsEnabled="False"/>
         <ComboBox Name="cmbTratamiento" Grid.Row ="4" Grid.Column="0" Margin="4,5.2,4.2,3.8" Background="LightGray" Height="31"/>
         <ComboBox Name="cmbEstado" Grid.Row ="4" Grid.Column="2" Margin="4.4,4.2,4,3.8" Background="LightGray" Height="32"/>
 
 
-        <DataGrid x:Name="dgvTratamiento" Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="6" Margin="10 10" Background="LightBlue"  />
+        <DataGrid x:Name="dgvTratamiento" Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="6" Margin="10 10" Background="LightBlue" MouseDoubleClick="dgvDetalleTratamiento_MouseDoubleClick" />
 
     </Grid>
 </Window>

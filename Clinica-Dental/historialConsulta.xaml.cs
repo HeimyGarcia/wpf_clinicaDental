@@ -65,11 +65,12 @@ namespace Clinica_Dental
             txtMotivoConsulta.Text = string.Empty;
             cmbEmpleado.Text = string.Empty;
             cmbEstado.Text = null;
-            txtHistorialClinico.Text = string.Empty;
+
+            txtConsulta.Text = string.Empty;
         }
         private void ObtenerHistorialConsulta()
         {
-            historialConsultas = consulta.MostrarHistorialConsulta();
+            historialConsultas = consulta.MostrarHistorialConsulta(Convert.ToInt32(txtHistorialClinico.Text));
             dgvHistorialConsulta.ItemsSource = historialConsultas;
 
         }
@@ -121,6 +122,7 @@ namespace Clinica_Dental
             txtObservaciones.Text = consulta.Observaciones;
             txtMotivoConsulta.Text = consulta.MotivoConsulta;
             txtHistorialClinico.Text = Convert.ToInt32(consulta.IdHistorialClinico).ToString();
+            txtConsulta.Text = Convert.ToInt32(consulta.IdHistorialConsulta).ToString();
             cmbEmpleado.SelectedValue = consulta.IdentidadEmpleado;
             cmbEstado.SelectedValue = consulta.Estado;
 
@@ -163,7 +165,7 @@ namespace Clinica_Dental
         private void dgvDetalleTratamiento_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             HistorialConsulta tratamientoSelecionado = dgvHistorialConsulta.SelectedItem as HistorialConsulta;
-            consulta = consulta.BuscarHistorialConsulta(tratamientoSelecionado.IdHistorialClinico);
+            consulta = consulta.BuscarHistorialConsulta(tratamientoSelecionado.IdHistorialConsulta);
 
             ValoresFormularioDesdeObjeto();
             Inhabilitar();
@@ -251,6 +253,32 @@ namespace Clinica_Dental
             consulta = consulta.BuscarHistorialConsulta(Convert.ToInt32(txtHistorialConsulta.Text));
 
             ValoresFormularioDesdeObjeto();
+        }
+
+        private void btnTratamiento_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                // Implementar la búsqueda del historialconsulta desde la clase HistorialConsulta
+                HistorialConsulta loshistoriales = consulta.BuscarHistorialConsulta2(Convert.ToInt32(txtConsulta.Text));
+
+                // Verificar si el historial existe
+                if (Convert.ToInt32(loshistoriales.IdHistorialConsulta).ToString() == null)
+                    MessageBox.Show("El historialConsulta no ha sido seleccionado. Favor verificar.");
+                else
+                {
+                    consultaTratamiento consultatratamiento = new consultaTratamiento(Convert.ToInt32(loshistoriales.IdHistorialConsulta));
+
+                    consultatratamiento.Show();
+
+                    Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                Console.WriteLine(ex.Message);
+            }
         }
     }
 }

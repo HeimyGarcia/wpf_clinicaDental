@@ -117,7 +117,7 @@ namespace Clinica_Dental
         /// Muestra todas las consultas
         /// </summary>
         /// <returns>Un listado de las consultas</returns>
-        public List<HistorialConsulta> MostrarHistorialConsulta()
+        public List<HistorialConsulta> MostrarHistorialConsulta(int idHistorialClinico)
         {
             // Inicializar una lista vacía de habitaciones
             List<HistorialConsulta> consultas = new List<HistorialConsulta>();
@@ -134,7 +134,7 @@ namespace Clinica_Dental
                 SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
 
                 // Establecer el valor del parámetro
-                sqlCommand.Parameters.AddWithValue("@idHistorialClinico", IdHistorialClinico);
+                sqlCommand.Parameters.AddWithValue("@idHistorialClinico", idHistorialClinico);
 
                 // Obtener los datos de las de la consulta
                 using (SqlDataReader rdr = sqlCommand.ExecuteReader())
@@ -168,9 +168,9 @@ namespace Clinica_Dental
         }
 
         /// <summary>
-        /// Obtiene un detalle por su idHistorialConsulta
+        /// Obtiene un detalle por su idHistorialClinico
         /// </summary>
-        /// <param name="idHistorialConsulta">El idHistorialConsulta del HistorialConsulta</param>
+        /// <param name="idHistorialClinico">El idHistorialConsulta del HistorialConsulta</param>
         /// <returns>Los datos del HistorialConsulta</returns>
         public HistorialConsulta BuscarHistorialConsulta(int idHistorialConsulta)
         {
@@ -217,6 +217,55 @@ namespace Clinica_Dental
             }
         }
 
+        // <summary>
+        /// Obtiene un detalle por su idHistorialConsulta
+        /// </summary>
+        /// <param name="idHistorialConsulta">El idHistorialConsulta del HistorialConsulta</param>
+        /// <returns>Los datos del HistorialConsulta</returns>
+        public HistorialConsulta BuscarHistorialConsulta2(int idHistorialConsulta)
+        {
+            HistorialConsulta elhistorialConsulta = new HistorialConsulta();
+
+            try
+            {
+                // Query de búsqueda
+                string query = @"SELECT * FROM Pacientes.HistorialConsulta
+                                 WHERE idHistorialConsulta = @idHistorialConsulta";
+
+                // Establecer la conexión
+                sqlConnection.Open();
+
+                // Crear el comando SQL
+                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+
+                // Establecer el valor del parámetro
+                sqlCommand.Parameters.AddWithValue("@idHistorialConsulta", idHistorialConsulta);
+
+                using (SqlDataReader rdr = sqlCommand.ExecuteReader())
+                {
+                    while (rdr.Read())
+                    {
+                        elhistorialConsulta.IdHistorialConsulta = Convert.ToInt32(rdr["idHistorialConsulta"]);
+                        elhistorialConsulta.IdHistorialClinico = Convert.ToInt32(rdr["idHistorialClinico"]);
+                        elhistorialConsulta.IdentidadEmpleado = rdr["identidadEmpleado"].ToString();
+                        elhistorialConsulta.MotivoConsulta = rdr["motivoConsulta"].ToString();
+                        elhistorialConsulta.Observaciones = rdr["observaciones"].ToString();
+                        elhistorialConsulta.Estado = (estadoHistorial)Convert.ToInt32((rdr["estado"])); //probar
+                    }
+                }
+
+                return elhistorialConsulta;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            finally
+            {
+                // Cerrar la conexión
+                sqlConnection.Close();
+            }
+        }
         /// <summary>
         /// Modifica los datos de la consulta
         /// </summary>
