@@ -36,9 +36,9 @@ namespace Clinica_Dental
             InitializeComponent();
             // Llenar el combobox de estado
             cmbEstado.ItemsSource = Enum.GetValues(typeof(estadoClinico));
+            txtIdentidadPaciente.Text = identidadPaciente;
             // Llenar el listbox de DetalleTratamiento
             ObtenerHistorialClinico();
-            txtIdentidadPaciente.Text = identidadPaciente;
 
 
         }
@@ -49,7 +49,6 @@ namespace Clinica_Dental
             txtAfecciones.Text = string.Empty;
             txtHistorialClinico.Text = string.Empty;
             cmbEstado.Text = null;
-            txtIdentidadPaciente.Text = string.Empty;
         }
         private void ObtenerHistorialClinico()
         {
@@ -157,7 +156,7 @@ namespace Clinica_Dental
                 {
                     consulta = consulta.BuscarHistorialClinico(txtIdentidadPaciente.Text);
 
-                    if (consulta.identidadPaciente != null)
+                    if (consulta.identidadPaciente == null)
                     {
                         // Obtener los valores para el historial
                         ObtenerValoresFormulario();

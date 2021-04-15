@@ -86,8 +86,8 @@ namespace Clinica_Dental
             try
             {
                 // Query de inserción
-                string query = @"INSERT INTO Pacientes.HistorialClinico (idHistorialClinico, identidadPaciente, fechaCreacion, observaciones, afecciones,estado)
-                                 VALUES (@idHistorialClinico, @identidadPaciente, @fechaCreacion,@observaciones,@afecciones,@estado)";
+                string query = @"INSERT INTO Pacientes.HistorialClinico (identidadPaciente, fechaCreacion, observaciones, afecciones,estado)
+                                 VALUES (@identidadPaciente, @fechaCreacion,@observaciones,@afecciones,@estado)";
 
                 // Establecer la conexión
                 sqlConnection.Open();
@@ -96,7 +96,6 @@ namespace Clinica_Dental
                 SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
 
                 // Establecer los valores de los parámetros
-                sqlCommand.Parameters.AddWithValue("@idHistorialClinico", historialClinico.IdHistorialClinico);
                 sqlCommand.Parameters.AddWithValue("@identidadPaciente", historialClinico.identidadPaciente);
                 sqlCommand.Parameters.AddWithValue("@fechaCreacion", historialClinico.FechaCreacion);
                 sqlCommand.Parameters.AddWithValue("@observaciones", historialClinico.Observaciones);
@@ -229,7 +228,7 @@ namespace Clinica_Dental
             {
                 // Query de actualización
                 string query = @"UPDATE Pacientes.HistorialClinico
-                                 SET idHistorialClinico = @idHistorialClinico, fechaCreacion = @fechaCreacion, afecciones = @afecciones, observaciones = @observaciones, identidadPaciente=@identidadPaciente ,estado= @estado
+                                 SET fechaCreacion = @fechaCreacion, afecciones = @afecciones, observaciones = @observaciones, identidadPaciente=@identidadPaciente ,estado= @estado
                                  WHERE idHistorialClinico = @idHistorialClinico";
 
                 // Establecer la conexión
