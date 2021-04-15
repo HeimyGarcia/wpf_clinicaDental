@@ -70,7 +70,7 @@ namespace Clinica_Dental
         }
         private void ObtenerHistorialConsulta()
         {
-            historialConsultas = consulta.MostrarHistorialConsulta();
+            historialConsultas = consulta.MostrarHistorialConsulta(Convert.ToInt32(txtHistorialClinico.Text));
             dgvHistorialConsulta.ItemsSource = historialConsultas;
 
         }
