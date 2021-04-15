@@ -85,6 +85,10 @@
     <Compile Include="cita.xaml.cs">
       <DependentUpon>cita.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ConsultaTratamiento.cs" />
+    <Compile Include="consultaTratamiento.xaml.cs">
+      <DependentUpon>consultaTratamiento.xaml</DependentUpon>
+    </Compile>
     <Compile Include="DetalleTratamiento.cs" />
     <Compile Include="detalleTratamiento.xaml.cs">
       <DependentUpon>detalleTratamiento.xaml</DependentUpon>
@@ -113,6 +117,10 @@
       <DependentUpon>usuario.xaml</DependentUpon>
     </Compile>
     <Page Include="cita.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="consultaTratamiento.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
