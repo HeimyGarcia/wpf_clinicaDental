@@ -149,7 +149,7 @@ namespace Clinica_Dental
             {
                 string query = @"update [Empleados].[Usuario] set 
                             nombreCompleto = @nombreCompleto, username = @username, password = @password,
-                            estado = @estado, tipoUsuario = @tipoUsuario where id = @id"
+                            estado = @estado, tipoUsuario = @tipoUsuario where nombreCompleto = @nombreCompleto"
                             ;
                 sqlConnection.Open();
                 SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
@@ -174,14 +174,14 @@ namespace Clinica_Dental
             }
         }
 
-        public void EliminarUsuario(int id)
+        public void EliminarUsuario(string nombreCompleto)
         {
             try
             {
-                string query = @"delete from [Empleados].[Usuarios] where id = @id";
+                string query = @"delete from [Empleados].[Usuarios] where nombreCompleto = @nombreCompleto";
                 sqlConnection.Open();
                 SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
-                sqlCommand.Parameters.AddWithValue("@id", id);
+                sqlCommand.Parameters.AddWithValue("@nombreCompleto", nombreCompleto);
                 sqlCommand.ExecuteNonQuery();
             }
             catch (Exception e)
@@ -195,7 +195,7 @@ namespace Clinica_Dental
             }
         }
 
-        public Usuarios BuscarUsuario(int id)
+        public Usuarios BuscarUsuario(string nombreCompleto)
         {
             Usuarios usuarios = new Usuarios();
             try
@@ -205,7 +205,7 @@ namespace Clinica_Dental
 
                 sqlConnection.Open();
                 SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
-                sqlCommand.Parameters.AddWithValue("@id", id);
+                sqlCommand.Parameters.AddWithValue("@nombreCompleto", nombreCompleto);
                 using (SqlDataReader rdr = sqlCommand.ExecuteReader())
                 {
                     while (rdr.Read())
