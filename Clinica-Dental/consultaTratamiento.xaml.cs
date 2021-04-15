@@ -64,11 +64,11 @@ namespace Clinica_Dental
         {
             cmbEstado.Text = null;
             cmbTratamiento.Text = null;
-            txtDetalleConsulta.Text = string.Empty;
+            
         }
         private void ObtenerTratamiento()
         {
-            tratamientos = elTratamiento.MostrarTratamiento();
+            tratamientos = elTratamiento.MostrarTratamiento(Convert.ToInt32(txtDetalleConsulta.Text));
             dgvTratamiento.ItemsSource = tratamientos;
 
         }

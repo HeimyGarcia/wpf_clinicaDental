@@ -65,7 +65,7 @@ namespace Clinica_Dental
             txtMotivoConsulta.Text = string.Empty;
             cmbEmpleado.Text = string.Empty;
             cmbEstado.Text = null;
-            txtHistorialClinico.Text = string.Empty;
+
             txtConsulta.Text = string.Empty;
         }
         private void ObtenerHistorialConsulta()
@@ -165,7 +165,7 @@ namespace Clinica_Dental
         private void dgvDetalleTratamiento_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             HistorialConsulta tratamientoSelecionado = dgvHistorialConsulta.SelectedItem as HistorialConsulta;
-            consulta = consulta.BuscarHistorialConsulta(tratamientoSelecionado.IdHistorialClinico);
+            consulta = consulta.BuscarHistorialConsulta(tratamientoSelecionado.IdHistorialConsulta);
 
             ValoresFormularioDesdeObjeto();
             Inhabilitar();
