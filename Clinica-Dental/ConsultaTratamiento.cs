@@ -155,7 +155,7 @@ namespace Clinica_Dental
         /// <param name="idTratamiento">El idTratamiento del DetalleTratamiento</param>
         /// <param name="idHistorialConsulta">El idHistorialConsulta del Tratamiento</param>
         /// <returns>Los datos del DetalleTratamiento</returns>
-        public ConsultaTratamiento BuscarTratamiento(int idTratamiento, int idHistorialConsulta)
+        public ConsultaTratamiento BuscarTratamiento(int idTratamiento)
         {
             ConsultaTratamiento elTratamiento = new ConsultaTratamiento();
 
@@ -163,7 +163,7 @@ namespace Clinica_Dental
             {
                 // Query de búsqueda
                 string query = @"SELECT * FROM Pacientes.ConsultaTratamiento
-                                 WHERE idTratamiento = @idTratamiento and idHistorialConsulta=@idHistorialConsulta";
+                                 WHERE idTratamiento = @idTratamiento ";
 
                 // Establecer la conexión
                 sqlConnection.Open();
@@ -173,7 +173,7 @@ namespace Clinica_Dental
 
                 // Establecer el valor del parámetro
                 sqlCommand.Parameters.AddWithValue("@idTratamiento", idTratamiento);
-                sqlCommand.Parameters.AddWithValue("@idHistorialConsulta", idHistorialConsulta);
+                
                 using (SqlDataReader rdr = sqlCommand.ExecuteReader())
                 {
                     while (rdr.Read())
