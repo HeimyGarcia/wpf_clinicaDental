@@ -151,7 +151,7 @@ namespace Clinica_Dental
         private void dgvDetalleTratamiento_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             ConsultaTratamiento tratamientoSelecionado = dgvTratamiento.SelectedItem as ConsultaTratamiento;
-            elTratamiento = elTratamiento.BuscarTratamiento(tratamientoSelecionado.IdTratamiento, tratamientoSelecionado.IdHistorialConsulta);
+            elTratamiento = elTratamiento.BuscarTratamiento(tratamientoSelecionado.IdTratamiento);
 
             ValoresFormularioDesdeObjeto();
             Inhabilitar();
@@ -236,7 +236,7 @@ namespace Clinica_Dental
 
         private void btnBuscar_Click(object sender, RoutedEventArgs e)
         {
-            elTratamiento = elTratamiento.BuscarTratamiento(Convert.ToInt32(txtTratamiento.Text), Convert.ToInt32(txtConsulta.Text));
+            elTratamiento = elTratamiento.BuscarTratamiento(Convert.ToInt32(txtTratamiento.Text));
 
             ValoresFormularioDesdeObjeto();
         }
