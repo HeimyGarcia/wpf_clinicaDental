@@ -40,6 +40,7 @@ namespace Clinica_Dental
             txtContraseña.Text = string.Empty;
             txtNombre.Text = string.Empty;
             txtUsuario.Text = string.Empty;
+            txtIdUsuario.Text = string.Empty;
             cmbEstado.SelectedValue = null;
             cmbPuesto.SelectedValue = null;
         }
@@ -49,16 +50,26 @@ namespace Clinica_Dental
             usuarios.NombreCompleto = txtNombre.Text;
             usuarios.Username = txtUsuario.Text;
             usuarios.Password = txtContraseña.Text;
-            usuarios.EstadoUsuario = (EstadoUsuario)cmbEstado.SelectedValue;
-            usuarios.TipoUsuario = (TipoUsuario)cmbPuesto.SelectedValue;
+            usuarios.EstadoUsuario = (EstadoUsuario)cmbEstado.SelectedItem;
+            usuarios.TipoUsuario = (TipoUsuario)cmbPuesto.SelectedItem;
         }
         private void ObtenerValoresDesdeObjeto()
         {
+            txtIdUsuario.Text = usuarios.Id.ToString();
             txtNombre.Text = usuarios.NombreCompleto;
             txtUsuario.Text = usuarios.Username;
             txtContraseña.Text = usuarios.Password;
             cmbEstado.SelectedValue = usuarios.EstadoUsuario;
             cmbPuesto.SelectedValue = usuarios.TipoUsuario;
+        }
+
+        private void Inhabilitar()
+        {
+            btnAgregar.IsEnabled = false;
+        }
+        private void Habilitar()
+        {
+            btnAgregar.IsEnabled = true;
         }
 
         private bool VerificarDatos()
@@ -118,9 +129,11 @@ namespace Clinica_Dental
         private void dgvUsuario_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             Usuarios usuarioSeleccionado = dgvUsuario.SelectedItem as Usuarios;
-            usuarios = usuarios.BuscarUsuario(usuarioSeleccionado.NombreCompleto);
+            usuarios = usuarios.BuscarUsuario(usuarioSeleccionado.Username);
 
             ObtenerValoresDesdeObjeto();
+
+            Inhabilitar();
            
         }
 
@@ -157,6 +170,8 @@ namespace Clinica_Dental
                         ObtenerUsuario();
 
                         LimpiarFormulario();
+
+                        Habilitar();
                     }
 
                 }
@@ -167,6 +182,8 @@ namespace Clinica_Dental
             usuarios = usuarios.BuscarUsuario(txtInfUsuario.Text);
 
             ObtenerValoresDesdeObjeto();
+
+            Inhabilitar();
         }
         private void btnEliminar_Click(object sender, RoutedEventArgs e)
         {
@@ -182,7 +199,7 @@ namespace Clinica_Dental
                     if (result == MessageBoxResult.Yes)
                     {
                         // Eliminar un empleado
-                        usuarios.EliminarUsuario(txtNombre.Text);
+                        usuarios.EliminarUsuario(usuarios);
                     }
                 }
             }
@@ -197,6 +214,8 @@ namespace Clinica_Dental
                 ObtenerUsuario();
 
                 LimpiarFormulario();
+
+                Habilitar();
             }
         }
     }

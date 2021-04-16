@@ -12,8 +12,8 @@ namespace Clinica_Dental
 {
     public enum EstadoUsuario
     {
-        Activo = 'A',
-        Inactivo = 'I'
+        Activo = 1,
+        Inactivo = 0
     }
 
     public enum TipoUsuario
@@ -50,16 +50,16 @@ namespace Clinica_Dental
             TipoUsuario = tipoUsuario;
         }
 
-        private string ObtenerEstado(EstadoUsuario estadoUsuario)
+        private int ObtenerEstado(EstadoUsuario estadoUsuario)
         {
             switch (estadoUsuario)
             {
                 case EstadoUsuario.Activo:
-                    return "Activo";
+                    return 1;
                 case EstadoUsuario.Inactivo:
-                    return "Inactivo";
+                    return 0;
                 default:
-                    return "Activo";
+                    return 1;
             }
         }
 
@@ -76,12 +76,25 @@ namespace Clinica_Dental
             }
         }
 
+        private int CambiarEstado(EstadoUsuario estadoUsuario)
+        {
+            switch (estadoUsuario)
+            {
+                case EstadoUsuario.Activo:
+                    return 0;
+                case EstadoUsuario.Inactivo:
+                    return 0;
+                default:
+                    return 0;
+            }
+        }
+
         public void AgregarUsuario(Usuarios usuarios)
         {
             try
             {
                 string query = @"insert into [Empleados].[Usuario] (nombreCompleto, username, password, estado, tipoUsuario)
-                            values (@)nombreCompleto, @username, @username, @estado, @tipoUsuario";
+                            values (@nombreCompleto, @username, @password, @estado, @tipoUsuario)";
                 sqlConnection.Open();
                 SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
 
@@ -121,10 +134,11 @@ namespace Clinica_Dental
                     {
                         usuarios.Add(new Usuarios
                         {
+                            Id = Convert.ToInt32(rdr["id"]),
                             NombreCompleto = rdr["nombreCompleto"].ToString(),
                             Username = rdr["username"].ToString(),
                             Password = rdr["password"].ToString(),
-                            EstadoUsuario = (EstadoUsuario)Convert.ToChar(rdr["estado"].ToString().Substring(0, 1)),
+                            EstadoUsuario = (EstadoUsuario)Convert.ToInt32(rdr["estado"]),
                             TipoUsuario = (TipoUsuario)Convert.ToChar(rdr["tipoUsuario"].ToString().Substring(0, 1))
 
                         });
@@ -149,11 +163,12 @@ namespace Clinica_Dental
             {
                 string query = @"update [Empleados].[Usuario] set 
                             nombreCompleto = @nombreCompleto, username = @username, password = @password,
-                            estado = @estado, tipoUsuario = @tipoUsuario where nombreCompleto = @nombreCompleto"
+                            estado = @estado, tipoUsuario = @tipoUsuario where id = @id"
                             ;
                 sqlConnection.Open();
                 SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
 
+                sqlCommand.Parameters.AddWithValue("@id", usuarios.Id);
                 sqlCommand.Parameters.AddWithValue("@nombreCompleto", usuarios.NombreCompleto);
                 sqlCommand.Parameters.AddWithValue("@username", usuarios.Username);
                 sqlCommand.Parameters.AddWithValue("@password", usuarios.Password);
@@ -174,14 +189,15 @@ namespace Clinica_Dental
             }
         }
 
-        public void EliminarUsuario(string nombreCompleto)
+        public void EliminarUsuario(Usuarios usuarios)
         {
             try
             {
-                string query = @"delete from [Empleados].[Usuarios] where nombreCompleto = @nombreCompleto";
+                string query = @"update [Empleados].[Usuario] set estado = @estado where id = @id";
                 sqlConnection.Open();
                 SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
-                sqlCommand.Parameters.AddWithValue("@nombreCompleto", nombreCompleto);
+                sqlCommand.Parameters.AddWithValue("@id", usuarios.Id);
+                sqlCommand.Parameters.AddWithValue("@estado", CambiarEstado(usuarios.EstadoUsuario));
                 sqlCommand.ExecuteNonQuery();
             }
             catch (Exception e)
@@ -195,25 +211,26 @@ namespace Clinica_Dental
             }
         }
 
-        public Usuarios BuscarUsuario(string nombreCompleto)
+        public Usuarios BuscarUsuario(string username)
         {
             Usuarios usuarios = new Usuarios();
             try
             {
                 string query = @"SELECT * FROM [Empleados].[Usuario]
-                                 WHERE id = @id";
+                                 WHERE username = @username";
 
                 sqlConnection.Open();
                 SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
-                sqlCommand.Parameters.AddWithValue("@nombreCompleto", nombreCompleto);
+                sqlCommand.Parameters.AddWithValue("@username", username);
                 using (SqlDataReader rdr = sqlCommand.ExecuteReader())
                 {
                     while (rdr.Read())
                     {
+                        usuarios.Id = Convert.ToInt32(rdr["id"]);
                         usuarios.NombreCompleto = rdr["nombreCompleto"].ToString();
                         usuarios.Username = rdr["username"].ToString();
                         usuarios.Password = rdr["password"].ToString();
-                        usuarios.EstadoUsuario = (EstadoUsuario)Convert.ToChar(rdr["estado"].ToString().Substring(0, 1));
+                        usuarios.EstadoUsuario = (EstadoUsuario)Convert.ToInt32(rdr["estado"]);
                         usuarios.TipoUsuario = (TipoUsuario)Convert.ToChar(rdr["tipoUsuario"].ToString().Substring(0, 1));
                     }
                 }

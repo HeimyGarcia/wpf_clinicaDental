@@ -52,7 +52,6 @@ namespace Clinica_Dental
 
         private void ObtenerValoresFormulario()
         {
-            citas.IdCita = Convert.ToInt32(txtIdCita.Text);
             citas.IdHistorialClinico = Convert.ToInt32(txtIdHistorialClinico.Text);
             citas.Nota = txtNota.Text;
             citas.FechaCita = dtpFechaCita.SelectedDate.Value;
