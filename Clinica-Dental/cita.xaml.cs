@@ -52,6 +52,7 @@ namespace Clinica_Dental
 
         private void ObtenerValoresFormulario()
         {
+            citas.IdCita = Convert.ToInt32(txtIdCita.Text);
             citas.IdHistorialClinico = Convert.ToInt32(txtIdHistorialClinico.Text);
             citas.Nota = txtNota.Text;
             citas.FechaCita = dtpFechaCita.SelectedDate.Value;
@@ -91,7 +92,7 @@ namespace Clinica_Dental
 
         private bool VerificarValores()
         {
-            if (txtIdCita.Text == string.Empty || txtNota.Text == string.Empty ||
+            if (txtNota.Text == string.Empty ||
                 txtIdHistorialClinico.Text == string.Empty)
             {
                 MessageBox.Show("Por favor ingresa todos los valores en las cajas de texto");
