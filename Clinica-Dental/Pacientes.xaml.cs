@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -90,6 +92,50 @@ namespace Clinica_Dental
             cmbEstado.SelectedValue = paciente.Estado;
         }
 
+        public static bool IsValidEmail(string email)
+        {
+            if (string.IsNullOrWhiteSpace(email))
+                return false;
+
+            try
+            {
+                // Normalizar el dominio
+                email = Regex.Replace(email, @"(@)(.+)$", DomainMapper,
+                                      RegexOptions.None, TimeSpan.FromMilliseconds(200));
+
+                // Examina la parte del dominio del correo electrónico y la normaliza.
+                string DomainMapper(Match match)
+                {
+                    // Utilice la clase IdnMapping para convertir nombres de dominio Unicode.
+                    var idn = new IdnMapping();
+
+                    // Extraiga y procese el nombre de dominio (arroja ArgumentException en inválido)
+                    string domainName = idn.GetAscii(match.Groups[2].Value);
+
+                    return match.Groups[1].Value + domainName;
+                }
+            }
+            catch (RegexMatchTimeoutException e)
+            {
+                return false;
+            }
+            catch (ArgumentException e)
+            {
+                return false;
+            }
+
+            try
+            {
+                return Regex.IsMatch(email,
+                    @"^[^@\s]+@[^@\s]+\.[^@\s]+$",
+                    RegexOptions.IgnoreCase, TimeSpan.FromMilliseconds(250));
+            }
+            catch (RegexMatchTimeoutException)
+            {
+                return false;
+            }
+        }
+
         private bool VerificarValores()
         {
             if (txtIdentidad.Text == string.Empty || txtNombre.Text == string.Empty ||
@@ -97,6 +143,11 @@ namespace Clinica_Dental
                 txtCorreo.Text == string.Empty || txtCelular.Text == string.Empty)
             {
                 MessageBox.Show("Por favor ingresa todos los valores en las cajas de texto");
+                return false;
+            }
+            else if (IsValidEmail(txtCorreo.Text) == false)
+            {
+                MessageBox.Show("El correo ingresado no tiene el formato correcto!!");
                 return false;
             }
             else if (cmbSexo.SelectedValue == null || cmbEstado.SelectedValue == null)
@@ -146,7 +197,7 @@ namespace Clinica_Dental
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Application.Current.Shutdown();
+            this.Close();
         }
 
         private void dgvPacientes_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -258,7 +309,6 @@ namespace Clinica_Dental
 
                     elhistorialclinico.Show();
 
-                    Close();
                 }
             }
             catch (Exception ex)
