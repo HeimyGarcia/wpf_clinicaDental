@@ -77,7 +77,7 @@
         <ComboBox Name="cmbEstado" Grid.Row="7" Grid.Column="1" Margin="4 4" Background="LightGray"/>
         <ComboBox Name="cmbSexo" Grid.Row ="6" Grid.Column="3" Margin="4 4" Background="LightGray"/>
 
-        <DataGrid x:Name="dgvEmpleado" Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="6" Margin="10 10" Background="LightBlue" MouseDoubleClick="dgvEmpleado_MouseDoubleClick"/>
+        <DataGrid x:Name="dgvEmpleado" Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="6" Margin="10 10" Background="LightBlue" IsReadOnly="True" MouseDoubleClick="dgvEmpleado_MouseDoubleClick"/>
 
 
     </Grid>

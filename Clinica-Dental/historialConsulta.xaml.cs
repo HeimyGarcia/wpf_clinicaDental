@@ -159,7 +159,7 @@ namespace Clinica_Dental
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Application.Current.Shutdown();
+            this.Close();
         }
 
         private void dgvDetalleTratamiento_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -270,8 +270,6 @@ namespace Clinica_Dental
                     consultaTratamiento consultatratamiento = new consultaTratamiento(Convert.ToInt32(loshistoriales.IdHistorialConsulta));
 
                     consultatratamiento.Show();
-
-                    Close();
                 }
             }
             catch (Exception ex)

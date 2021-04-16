@@ -260,7 +260,7 @@ namespace Clinica_Dental
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Application.Current.Shutdown();
+            this.Close();
         }
 
     }

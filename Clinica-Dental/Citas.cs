@@ -170,7 +170,7 @@ namespace Clinica_Dental
             {
                 // Query de actualización
                 string query = @"update [Pacientes].[cita]
-                                set  fechaCita = @fechaCita, nota = @nota, hora = @hora
+                                set  fechaCita = @fechaCita, nota = @nota, hora = @hora, estado = @estado
                                 where idCita = @idCita";
 
                 // Establecer la conexión

@@ -109,7 +109,7 @@ namespace Clinica_Dental
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Application.Current.Shutdown();
+            this.Close();
         }
 
         private void btnEliminar_Click(object sender, RoutedEventArgs e)
@@ -251,8 +251,6 @@ namespace Clinica_Dental
                     cita lacita = new cita(Convert.ToInt32(elHistorial.IdHistorialClinico));
 
                     lacita.Show();
-
-                    Close();
                 }
             }
             catch (Exception ex)
@@ -292,8 +290,6 @@ namespace Clinica_Dental
                     historialConsulta historialConsultas = new historialConsulta(Convert.ToInt32(loshistorialesClinicos.IdHistorialClinico));
 
                     historialConsultas.Show();
-
-                    Close();
                 }
             }
             catch (Exception ex)

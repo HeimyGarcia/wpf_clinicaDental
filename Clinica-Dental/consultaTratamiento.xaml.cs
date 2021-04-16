@@ -145,7 +145,7 @@ namespace Clinica_Dental
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Application.Current.Shutdown();
+            this.Close();
         }
 
         private void dgvDetalleTratamiento_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -239,6 +239,7 @@ namespace Clinica_Dental
             elTratamiento = elTratamiento.BuscarTratamiento(Convert.ToInt32(txtTratamiento.Text));
 
             ValoresFormularioDesdeObjeto();
+            Inhabilitar();
         }
 
         
