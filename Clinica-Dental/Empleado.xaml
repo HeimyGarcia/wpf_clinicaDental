@@ -37,7 +37,7 @@
             <Grid>
                 <materialDesign:ColorZone Mode="PrimaryDark">
                     <StackPanel HorizontalAlignment="Right">
-                        <Button Width="30" Height="30" materialDesign:ShadowAssist.ShadowDepth="Depth3" Padding="0" >
+                        <Button Width="30" Height="30" materialDesign:ShadowAssist.ShadowDepth="Depth3" Padding="0" Click="Button_Click_1" >
                             <materialDesign:PackIcon Kind="WindowClose"/>
                         </Button>
                     </StackPanel>
@@ -70,7 +70,7 @@
 
         <StackPanel Orientation="Horizontal" Margin="10 4" Grid.Row="7" Grid.Column="2" Grid.ColumnSpan="2">
             <materialDesign:PackIcon Kind="Search" Foreground="{Binding ElementName=txtPaciente, Path=BorderBrush}" VerticalAlignment="Bottom" Margin="0 4"/>
-            <TextBox x:Name="txtPaciente" Width="300" materialDesign:HintAssist.Hint="Empleado" materialDesign:HintAssist.IsFloating="True"/>
+            <TextBox x:Name="txtIdentidadEmpleado" Width="300" materialDesign:HintAssist.Hint="Identidad Empleado" materialDesign:HintAssist.IsFloating="True"/>
         </StackPanel>
 
         <ComboBox Name="cmbPuesto" Grid.Row="6" Grid.Column="1" Margin="4 4" Background="LightGray"/>

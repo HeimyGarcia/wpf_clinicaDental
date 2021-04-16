@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -82,6 +84,51 @@ namespace Clinica_Dental
             cmbEstado.SelectedValue = empleado.EstadoEmpleado;
             cmbPuesto.SelectedValue = empleado.PuestoEmpleado;
         }
+
+        public static bool IsValidEmail(string email)
+        {
+            if (string.IsNullOrWhiteSpace(email))
+                return false;
+
+            try
+            {
+                // Normalizar el dominio
+                email = Regex.Replace(email, @"(@)(.+)$", DomainMapper,
+                                      RegexOptions.None, TimeSpan.FromMilliseconds(200));
+
+                // Examina la parte del dominio del correo electrónico y la normaliza.
+                string DomainMapper(Match match)
+                {
+                    // Utilice la clase IdnMapping para convertir nombres de dominio Unicode.
+                    var idn = new IdnMapping();
+
+                    // Extraiga y procese el nombre de dominio (arroja ArgumentException en inválido)
+                    string domainName = idn.GetAscii(match.Groups[2].Value);
+
+                    return match.Groups[1].Value + domainName;
+                }
+            }
+            catch (RegexMatchTimeoutException e)
+            {
+                return false;
+            }
+            catch (ArgumentException e)
+            {
+                return false;
+            }
+
+            try
+            {
+                return Regex.IsMatch(email,
+                    @"^[^@\s]+@[^@\s]+\.[^@\s]+$",
+                    RegexOptions.IgnoreCase, TimeSpan.FromMilliseconds(250));
+            }
+            catch (RegexMatchTimeoutException)
+            {
+                return false;
+            }
+        }
+
         private bool VerificarValores()
         {
             if (txtIdentidad.Text == string.Empty || txtNombre.Text == string.Empty ||
@@ -89,6 +136,11 @@ namespace Clinica_Dental
                 txtCorreo.Text == string.Empty || txtCelular.Text == string.Empty)
             {
                 MessageBox.Show("Por favor ingresa todos los valores en las cajas de texto");
+                return false;
+            }
+            else if (IsValidEmail(txtCorreo.Text) == false)
+            {
+                MessageBox.Show("El correo ingresado no tiene el formato correcto!!");
                 return false;
             }
             else if (cmbSexo.SelectedValue == null)
@@ -138,10 +190,7 @@ namespace Clinica_Dental
                 }
             }
         }
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            Application.Current.Shutdown();
-        }
+        
         private void dgvEmpleado_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             Empleados empleadoSeleccionado = dgvEmpleado.SelectedItem as Empleados;
@@ -194,9 +243,11 @@ namespace Clinica_Dental
         }
         private void btnBuscar_Click(object sender, RoutedEventArgs e)
         {
-            empleado = empleado.BuscarPersona(txtIdentidad.Text);
+            empleado = empleado.BuscarPersona(txtIdentidadEmpleado.Text);
 
             ValoresFormularioDesdeObjeto();
+
+            Inhabilitar();
         }
         private void btnEliminar_Click(object sender, RoutedEventArgs e)
         {
@@ -212,7 +263,7 @@ namespace Clinica_Dental
                     if (result == MessageBoxResult.Yes)
                     {
                         // Eliminar un empleado
-                        empleado.EliminarEmpleado(txtIdentidad.Text);
+                        empleado.EliminarEmpleado(empleado);
                     }
                 }
             }
@@ -229,6 +280,11 @@ namespace Clinica_Dental
                 LimpiarFormulario();
                 Habilitar();
             }
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }
