@@ -164,7 +164,7 @@ namespace Clinica_Dental
         }
         private void btnBuscar_Click(object sender, RoutedEventArgs e)
         {
-            usuarios = usuarios.BuscarUsuario(txtNombre.Text);
+            usuarios = usuarios.BuscarUsuario(txtInfUsuario.Text);
 
             ObtenerValoresDesdeObjeto();
         }
