@@ -65,5 +65,22 @@ namespace Clinica_Dental
                 DragMove();
             }
         }
+
+        private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            int index = ListaView.SelectedIndex;
+            switch (index)
+            {
+                case 0:
+                    GridPrincipal.Children.Clear();
+                    GridPrincipal.Children.Add(new pacienteU());
+                    break;
+
+                default:
+                    break;
+            }
+        }
+
+        
     }
 }
