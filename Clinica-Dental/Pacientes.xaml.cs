@@ -215,7 +215,7 @@ namespace Clinica_Dental
                     if (result == MessageBoxResult.Yes)
                     {
                         // Eliminar el paciente
-                        paciente.EliminarPaciente(txtIdentidad.Text);
+                        paciente.EliminarPaciente(paciente);
                     }
                 }
             }
