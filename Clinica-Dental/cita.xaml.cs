@@ -23,20 +23,20 @@ namespace Clinica_Dental
         private Citas citas = new Citas();
         private List<Citas> lascitas;
 
-        public cita(int idCita)
+        public cita(int idHistorialClinico)
         {
             InitializeComponent();
 
             // Llenar el combobox de estado
             cmbEstado.ItemsSource = Enum.GetValues(typeof(EstadoCita));
-            txtIdCita.Text = idCita.ToString();
+            txtIdHistorialClinico.Text = idHistorialClinico.ToString();
 
             ObtenerCitas();
         }
 
         private void ObtenerCitas()
         {
-            lascitas = citas.MostrarCitas();
+            lascitas = citas.MostrarCitas(Convert.ToInt32(txtIdHistorialClinico.Text));
             dgvCita.ItemsSource = lascitas;
         }
 
@@ -52,18 +52,17 @@ namespace Clinica_Dental
 
         private void ObtenerValoresFormulario()
         {
-            citas.IdCita = Convert.ToInt32(txtIdCita.Text);
             citas.IdHistorialClinico = Convert.ToInt32(txtIdHistorialClinico.Text);
             citas.Nota = txtNota.Text;
             citas.FechaCita = dtpFechaCita.SelectedDate.Value;
-            citas.Hora = tmpHora.SelectedTime.Value;
+            citas.Hora = TimeSpan.Parse(tmpHora.SelectedTime.Value.ToString("H:mm"));
             citas.EstadoCita = (EstadoCita)cmbEstado.SelectedItem;
 
         }
 
         public bool VerificarHora()
         {
-            if (citas.Hora.Hour >= 8 && citas.Hora.Hour <= 4)
+            if (tmpHora.SelectedTime.Value.Hour >= 8 && tmpHora.SelectedTime.Value.Hour <= 16)
                 return true;
 
             return false;
@@ -86,7 +85,7 @@ namespace Clinica_Dental
             txtIdHistorialClinico.Text = citas.IdHistorialClinico.ToString();
             txtNota.Text = citas.Nota;
             dtpFechaCita.SelectedDate = citas.FechaCita;
-            tmpHora.SelectedTime = citas.Hora;
+            tmpHora.SelectedTime = Convert.ToDateTime(citas.Hora.ToString());
             cmbEstado.SelectedValue = citas.EstadoCita;
         }
 
@@ -136,8 +135,9 @@ namespace Clinica_Dental
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Ha ocurrido un error al momento de insertar la cita...");
-                    Console.WriteLine(ex.Message);
+                    //MessageBox.Show("Ha ocurrido un error al momento de insertar la cita...");
+                    //Console.WriteLine(ex.Message);
+                    throw ex;
                 }
                 finally
                 {
@@ -166,20 +166,28 @@ namespace Clinica_Dental
                 {
                     try
                     {
-                        // Obtener los valores para de la cita desde el formulario
-                        ObtenerValoresFormulario();
-
-                        // Mostrar un mensaje de confirmación
-                        MessageBoxResult result = MessageBox.Show("¿Deseas modificar la cita?", "Confirmar", MessageBoxButton.YesNo, MessageBoxImage.Warning);
-
-                        if (result == MessageBoxResult.Yes)
+                        if (VerificarHora())
                         {
-                            // Modificar Cita
-                            citas.ModificarCita(citas);
+                            // Obtener los valores para de la cita desde el formulario
+                            ObtenerValoresFormulario();
 
-                            // Mensaje de actualización realizada
-                            MessageBox.Show("¡Cita modificada correctamente!");
+                            // Mostrar un mensaje de confirmación
+                            MessageBoxResult result = MessageBox.Show("¿Deseas modificar la cita?", "Confirmar", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+
+                            if (result == MessageBoxResult.Yes)
+                            {
+                                // Modificar Cita
+                                citas.ModificarCita(citas);
+
+                                // Mensaje de actualización realizada
+                                MessageBox.Show("¡Cita modificada correctamente!");
+                            }
                         }
+                        else
+                        {
+                            MessageBox.Show("¡La hora de la cita debe estar compredida entre las 8:00 AM hasta 4:00 PM!");
+                        }
+                        
 
                     }
                     catch (Exception ex)

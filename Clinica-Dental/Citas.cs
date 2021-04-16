@@ -28,12 +28,12 @@ namespace Clinica_Dental
         public int IdHistorialClinico { get; set; }
         public string Nota { get; set; }
         public DateTime FechaCita { get; set; }
-        public DateTime Hora { get; set; }
+        public TimeSpan Hora { get; set; }
         public EstadoCita EstadoCita { get; set; }
 
         //Constructores
         public Citas() { }
-        public Citas(int idCita, int idHistorialClinico, string nota,  DateTime fechaCita, DateTime hora, EstadoCita status)
+        public Citas(int idCita, int idHistorialClinico, string nota,  DateTime fechaCita, TimeSpan hora, EstadoCita status)
         {
             IdCita = idCita;
             IdHistorialClinico = idHistorialClinico;
@@ -93,7 +93,7 @@ namespace Clinica_Dental
                 sqlCommand.Parameters.AddWithValue("@idHistorialClinico", citas.IdHistorialClinico);
                 sqlCommand.Parameters.AddWithValue("@nota", citas.Nota);
                 sqlCommand.Parameters.AddWithValue("@fechaCita", citas.FechaCita.ToString("yyyy-MM-dd"));
-                sqlCommand.Parameters.AddWithValue("@hora", citas.Hora.ToString("hh"));
+                sqlCommand.Parameters.AddWithValue("@hora", citas.Hora.ToString());
                 sqlCommand.Parameters.AddWithValue("@estado", ObtenerEstado(citas.EstadoCita));
 
                 // Ejecutar el comando de inserción
@@ -114,7 +114,7 @@ namespace Clinica_Dental
         /// Mostrar la lista de información de los citas.
         /// </summary>
         /// <returns>Lista de citas.</returns>
-        public List<Citas> MostrarCitas()
+        public List<Citas> MostrarCitas(int idHistorial)
         {
             //Inicializar una lista vacía de las citas
             List<Citas> citas = new List<Citas>();
@@ -122,13 +122,14 @@ namespace Clinica_Dental
             try
             {
                 // Query de selección
-                string query = @"select * from [Pacientes].[Cita]";
+                string query = @"select * from [Pacientes].[Cita] where idHistorialClinico = @idHistorialClinico";
 
                 // Establecer la conexión
                 sqlConnection.Open();
 
                 // Crear el comando SQL
                 SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+                sqlCommand.Parameters.AddWithValue("@idHistorialClinico", idHistorial);
 
                 // Obtener los datos de la cita
                 using (SqlDataReader rdr = sqlCommand.ExecuteReader())
@@ -141,7 +142,7 @@ namespace Clinica_Dental
                             IdHistorialClinico = Convert.ToInt32(rdr["idHistorialClinico"]),
                             Nota = rdr["nota"].ToString(),
                             FechaCita = Convert.ToDateTime(rdr["fechaCita"]),
-                            Hora = Convert.ToDateTime(rdr["hora"]),
+                            Hora = TimeSpan.Parse((string)rdr["hora"].ToString()),
                             EstadoCita = (EstadoCita)Convert.ToInt32((rdr["estado"]))
                         });
                     }
@@ -182,7 +183,7 @@ namespace Clinica_Dental
                 sqlCommand.Parameters.AddWithValue("@idCita", cita.IdCita);
                 sqlCommand.Parameters.AddWithValue("@nota", cita.Nota);
                 sqlCommand.Parameters.AddWithValue("@fechaCita", cita.FechaCita.ToString("yyyy-MM-dd"));
-                sqlCommand.Parameters.AddWithValue("@hora", cita.Hora.ToString("hh"));
+                sqlCommand.Parameters.AddWithValue("@hora", cita.Hora.ToString());
                 sqlCommand.Parameters.AddWithValue("@estado", ObtenerEstado(cita.EstadoCita));
 
                 // Ejecutar el comando de actualización
@@ -220,6 +221,7 @@ namespace Clinica_Dental
 
                 // Establecer el valor del parámetro
                 sqlCommand.Parameters.AddWithValue("@idCita", cita.IdCita);
+                sqlCommand.Parameters.AddWithValue("@estado", CambiarEstado(cita.EstadoCita));
 
                 // Ejecutar el comando de eliminación
                 sqlCommand.ExecuteNonQuery();
@@ -267,7 +269,7 @@ namespace Clinica_Dental
                         lacita.IdHistorialClinico = Convert.ToInt32(rdr["idHistorialClinico"]);
                         lacita.Nota = rdr["nota"].ToString();
                         lacita.FechaCita = Convert.ToDateTime(rdr["fechaCita"]);
-                        lacita.Hora = Convert.ToDateTime(rdr["hora"]);
+                        lacita.Hora = TimeSpan.Parse((string)rdr["hora"].ToString());
                         lacita.EstadoCita = (EstadoCita)Convert.ToInt32((rdr["estado"]));
                     }
                 }
