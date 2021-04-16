@@ -18,8 +18,8 @@ namespace Clinica_Dental
     }
     public enum EstadoEmpleado
     {
-        Inactivo = 'I',
-        Activo = 'A'
+        Inactivo = 0,
+        Activo = 1
     }
     public enum Puesto
     {
@@ -71,16 +71,16 @@ namespace Clinica_Dental
                     return "Masculino";
             }
         }
-        private string ObtenerEstado(EstadoEmpleado estado)
+        private int ObtenerEstado(EstadoEmpleado estado)
         {
             switch (estado)
             {
                 case EstadoEmpleado.Activo:
-                    return "Activo";
+                    return 1;
                 case EstadoEmpleado.Inactivo:
-                    return "Inactivo";
+                    return 0;
                 default:
-                    return "Activo";
+                    return 1;
             }
         }
 
@@ -95,11 +95,24 @@ namespace Clinica_Dental
                 case Puesto.Odontologo:
                     return "Odontologo";
                 case Puesto.HigienistaDental:
-                    return "Higienista Dental";
+                    return "Higienista dental";
                 case Puesto.AsistenteDental:
                     return "Asistente Dental";
                 default:
                     return "Recepcionista";
+            }
+        }
+
+        private int CambiarEstado(EstadoEmpleado estadoEmpleado)
+        {
+            switch (estadoEmpleado)
+            {
+                case EstadoEmpleado.Activo:
+                    return 0;
+                case EstadoEmpleado.Inactivo:
+                    return 0;
+                default:
+                    return 0;
             }
         }
 
@@ -110,7 +123,7 @@ namespace Clinica_Dental
                 // Query de inserción
                 string query = @"insert into [Empleados].[Empleado]
                                 values (@identidad,@nombres,@apellidos,@direccion,
-                                @correo,@celular,@sexo, @estado, @puesto)";
+                                @correo,@celular,@sexo, @puesto, @estado)";
 
                 // Establecer la conexión
                 sqlConnection.Open();
@@ -175,7 +188,7 @@ namespace Clinica_Dental
                             Celular = rdr["celular"].ToString(),
                             Direccion = rdr["direccion"].ToString(),
                             SexoEmpleado = (Genero)Convert.ToChar(rdr["sexo"].ToString().Substring(0, 1)),
-                            EstadoEmpleado = (EstadoEmpleado)Convert.ToChar(rdr["estado"].ToString().Substring(0, 1)),
+                            EstadoEmpleado = (EstadoEmpleado)Convert.ToInt32(rdr["estado"]),
                             PuestoEmpleado = (Puesto)Convert.ToChar(rdr["puesto"].ToString().Substring(0, 1))
                         });
                     }
@@ -236,12 +249,13 @@ namespace Clinica_Dental
             }
         }
 
-        public void EliminarEmpleado(string identidad)
+        public void EliminarEmpleado(Empleados empleados)
         {
             try
             {
                 // Query de eliminación
-                string query = @"DELETE FROM [Empleados].[Empleado]
+                string query = @"Update [Empleados].[Empleado]
+                                set estado = @estado
                                  WHERE identidad = @identidad";
 
                 // Establecer la conexión
@@ -251,7 +265,8 @@ namespace Clinica_Dental
                 SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
 
                 // Establecer el valor del parámetro
-                sqlCommand.Parameters.AddWithValue("@identidad", identidad);
+                sqlCommand.Parameters.AddWithValue("@identidad", empleados.Identidad);
+                sqlCommand.Parameters.AddWithValue("@estado", CambiarEstado(empleados.EstadoEmpleado));
 
                 // Ejecutar el comando de eliminación
                 sqlCommand.ExecuteNonQuery();
@@ -297,7 +312,7 @@ namespace Clinica_Dental
                         elempleado.Celular = rdr["celular"].ToString();
                         elempleado.Direccion = rdr["direccion"].ToString();
                         elempleado.SexoEmpleado = (Genero)Convert.ToChar(rdr["sexo"].ToString().Substring(0, 1));
-                        elempleado.EstadoEmpleado = (EstadoEmpleado)Convert.ToChar(rdr["estado"].ToString().Substring(0, 1));
+                        elempleado.EstadoEmpleado = (EstadoEmpleado)Convert.ToInt32(rdr["estado"]);
                         elempleado.PuestoEmpleado = (Puesto)Convert.ToChar(rdr["puesto"].ToString().Substring(0, 1));
                     }
                 }
