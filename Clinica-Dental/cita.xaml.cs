@@ -123,12 +123,22 @@ namespace Clinica_Dental
                         // Obtener los valores para la cita
                         ObtenerValoresFormulario();
 
-                        // Insertar los datos de la cita
-                        citas.AgregarCita(citas);
+                        if (citas.BuscarHora(citas) >= 2)
+                        {
+                            MessageBox.Show("¡Ya hay cita reservada para esa hora!");
 
-                        // Mensaje de inserción exitosa
-                        MessageBox.Show("¡Datos insertados correctamente!");
-                    }else
+                        }
+                        else
+                        {
+                            // Insertar los datos de la cita
+                            citas.AgregarCita(citas);
+
+                            // Mensaje de inserción exitosa
+                            MessageBox.Show("¡Datos insertados correctamente!");
+                        }
+
+                    }
+                    else
                         MessageBox.Show("¡La hora de la cita debe estar compredida entre las 8:00 AM hasta 4:00 PM!");
 
 

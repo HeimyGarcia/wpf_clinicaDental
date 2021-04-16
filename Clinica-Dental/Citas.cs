@@ -286,5 +286,45 @@ namespace Clinica_Dental
                 sqlConnection.Close();
             }
         }
+
+        public int BuscarHora(Citas citas)
+        {
+            int count = 0;
+            try
+            {
+                // Query de búsqueda
+                string query = @"SELECT count(*) as total FROM [Pacientes].[Cita]
+                                 WHERE fechaCita = @fechaCita and hora = @hora";
+
+                // Establecer la conexión
+                sqlConnection.Open();
+
+                // Crear el comando SQL
+                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+
+                // Establecer el valor del parámetro
+                sqlCommand.Parameters.AddWithValue("@fechaCita", citas.FechaCita.ToString("yyyy-MM-dd"));
+                sqlCommand.Parameters.AddWithValue("@hora", citas.Hora.ToString());
+
+                using (SqlDataReader rdr = sqlCommand.ExecuteReader())
+                {
+                    while (rdr.Read())
+                    {
+                        count = Convert.ToInt32(rdr["total"]);
+                    }
+                }
+
+                return count;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            finally
+            {
+                // Cerrar la conexión
+                sqlConnection.Close();
+            }
+        }
     }
 }
