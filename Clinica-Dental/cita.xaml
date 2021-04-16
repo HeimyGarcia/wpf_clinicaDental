@@ -57,8 +57,8 @@
         <Image Source="/Imagenes/LogoMedicDentalSystem.jpeg.jpeg" Grid.Row="1" Grid.Column="1" Stretch="Uniform" Margin="10 0 0 10" HorizontalAlignment="Right"/>
 
         <TextBox Name="txtIdCita" Grid.Row="3" Grid.Column="0"  Margin="10 4 4 4" Background="LightGray"/>
-        <TextBox Name="txtIdHistorialClinico" Grid.Row="3" Grid.Column="1"  Margin="4 4" Background="LightGray"/>
-        <materialDesign:TimePicker Name="txtHora" Grid.Row="6" Grid.Column="3"  Margin="4 4" Background="LightGray"/>
+        <TextBox Name="txtIdHistorialClinico" Grid.Row="3" Grid.Column="1"  Margin="4 4" Background="LightGray" IsEnabled="False"/>
+        <materialDesign:TimePicker Name="tmpHora" Grid.Row="6" Grid.Column="3"  Margin="4 4" Background="LightGray" SelectedTimeFormat="Long"/>
 
         <TextBox Name="txtNota" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="3" Margin="10 4 4 4" Background="LightGray"/>
 
@@ -76,7 +76,7 @@
         <DatePicker Name="dtpFechaCita" Grid.Row="6" Grid.Column="1" Margin="4 4"/>
         <ComboBox Name="cmbEstado" Grid.Row ="3" Grid.Column="2" Margin="4 4" Background="LightGray"/>
 
-        <DataGrid x:Name="dgvCita" Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="6" Margin="10 10" Background="LightBlue" />
+        <DataGrid x:Name="dgvCita" Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="6" Margin="10 10" Background="LightBlue" MouseDoubleClick="dgvPacientes_MouseDoubleClick" IsReadOnly="True" />
 
     </Grid>
 </Window>

@@ -85,6 +85,7 @@
     <Compile Include="cita.xaml.cs">
       <DependentUpon>cita.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Citas.cs" />
     <Compile Include="ConsultaTratamiento.cs" />
     <Compile Include="consultaTratamiento.xaml.cs">
       <DependentUpon>consultaTratamiento.xaml</DependentUpon>

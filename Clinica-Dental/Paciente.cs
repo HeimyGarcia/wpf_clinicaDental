@@ -239,8 +239,8 @@ namespace Clinica_Dental
         /// <summary>
         /// Modifica el estado de los datos de un paciente.
         /// </summary>
-        /// <param name="identidad">Información del paciente a eliminar</param>
-        public void EliminarPaciente(string identidad)
+        /// <param name="paciente">Información del paciente a eliminar</param>
+        public void EliminarPaciente(Paciente paciente)
         {
             try
             {
@@ -256,7 +256,8 @@ namespace Clinica_Dental
                 SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
 
                 // Establecer el valor del parámetro
-                sqlCommand.Parameters.AddWithValue("@identidad", identidad);
+                sqlCommand.Parameters.AddWithValue("@identidad", paciente.Identidad);
+                sqlCommand.Parameters.AddWithValue("@estado", CambiarEstado(paciente.Estado));
 
                 // Ejecutar el comando de eliminación
                 sqlCommand.ExecuteNonQuery();

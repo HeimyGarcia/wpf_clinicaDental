@@ -238,7 +238,28 @@ namespace Clinica_Dental
 
         private void btnCita_Click(object sender, RoutedEventArgs e)
         {
+            try
+            {
+                // Implementar la búsqueda del paciente desde la clase Paciente
+                HistorialesClinicos elHistorial = consulta.BuscarHistorialClinico(txtIdentidadPaciente.Text);
 
+                // Verificar si el paciente existe
+                if (elHistorial.IdHistorialClinico == null)
+                    MessageBox.Show("El historial clínico no ha sido seleccionado. Favor verificar.");
+                else
+                {
+                    cita lacita = new cita(Convert.ToInt32(elHistorial.IdHistorialClinico));
+
+                    lacita.Show();
+
+                    Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                Console.WriteLine(ex.Message);
+            }
         }
 
         private void dgvHistorialClinico_MouseDoubleClick(object sender, MouseButtonEventArgs e)
