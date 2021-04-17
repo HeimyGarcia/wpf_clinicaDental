@@ -115,6 +115,9 @@
     <Compile Include="menuPrincipal.xaml.cs">
       <DependentUpon>menuPrincipal.xaml</DependentUpon>
     </Compile>
+    <Compile Include="menuPrincipal2.xaml.cs">
+      <DependentUpon>menuPrincipal2.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Paciente.cs" />
     <Compile Include="Pacientes.xaml.cs">
       <DependentUpon>Pacientes.xaml</DependentUpon>
@@ -175,6 +178,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="menuPrincipal.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="menuPrincipal2.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

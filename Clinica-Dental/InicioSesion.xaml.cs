@@ -54,10 +54,21 @@ namespace Clinica_Dental
                     // almacenada en la base de datos
                     if (elUsuario.Password == pwbContraseña.Password && elUsuario.Estado)
                     {
+                        txtUsuario.Text = string.Empty;
+                        pwbContraseña.Clear();
                         MessageBox.Show("Bienvenido al sistema!!!.");
-                        menuPrincipal menu = new menuPrincipal();
+                        if (elUsuario.TipoUsuario == "Administrador")
+                        {
+                            menuPrincipal menu = new menuPrincipal();
 
-                        menu.Show();
+                            menu.Show();
+                        }
+                        else
+                        {
+                            menuPrincipal2 menu2 = new menuPrincipal2();
+
+                            menu2.Show();
+                        }
                     }
                     else if (!elUsuario.Estado)
                         MessageBox.Show("Tu usuario se encuentra innactivo. Favor comunicarte con el personal de IT");

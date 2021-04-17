@@ -1,4 +1,4 @@
-﻿<Window x:Class="Clinica_Dental.menuPrincipal"
+﻿<Window x:Class="Clinica_Dental.menuPrincipal2"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         Background="{DynamicResource MaterialDesignPaper}"
         TextElement.FontWeight="Medium"
@@ -12,7 +12,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Clinica_Dental"
         mc:Ignorable="d"
-        Title="Menu Principal" Height="700" Width="1000" ResizeMode="NoResize" WindowStyle="None" WindowStartupLocation="CenterScreen">
+        Title="menuPrincipal2" Height="700" Width="1000" ResizeMode="NoResize" WindowStyle="None" WindowStartupLocation="CenterScreen">
     <Grid Background="#FFD6D6D6">
         <Grid>
             <materialDesign:ColorZone Mode="PrimaryDark" >
@@ -22,7 +22,7 @@
                     </Button>
                 </StackPanel>
             </materialDesign:ColorZone>
-            
+
         </Grid>
 
 
@@ -33,28 +33,13 @@
             <StackPanel>
                 <Grid Height="150" Background="White">
                     <Image Source="/Imagenes/LogoMedicDentalSystem.jpeg.jpeg" />
-                    
+
                 </Grid>
                 <ListView Name="ListaView" FontFamily="Century Gothic" FontSize="14" Foreground="White" BorderBrush="Transparent" Background="Transparent" SelectionChanged="ListView_SelectionChanged">
                     <ListViewItem Height="60">
                         <StackPanel Orientation="Horizontal">
                             <Image Source="/Imagenes/empleados1.jpg" Height="30" Width="30" VerticalAlignment="Center"/>
                             <TextBlock Text="Empleados" FontSize="20" Margin="15 0 0 0 " VerticalAlignment="Center"/>
-                        </StackPanel>
-
-
-                    </ListViewItem>
-                    <ListViewItem Height="60">
-                        <StackPanel Orientation="Horizontal">
-                            <Image Source="/Imagenes/usuarios.png" Height="30" Width="30" VerticalAlignment="Center" />
-                            <TextBlock Text="Usuarios" FontSize="20" Margin="15 0 0 0 " VerticalAlignment="Center"/>
-                        </StackPanel>
-
-                    </ListViewItem>
-                    <ListViewItem Height="60">
-                        <StackPanel Orientation="Horizontal">
-                            <Image Source="/Imagenes/puesto.png" Height="30" Width="30" VerticalAlignment="Center"/>
-                            <TextBlock Text="Tratamiento" FontSize="19" Margin="15 0 0 0 " VerticalAlignment="Center"/>
                         </StackPanel>
 
                     </ListViewItem>
@@ -69,6 +54,6 @@
             </StackPanel>
         </Grid>
 
-        <Grid x:Name="GridPrincipal" Margin="180,55,0,0"/>
+        <Grid x:Name="GridPrincipal2" Margin="180,55,0,0"/>
     </Grid>
 </Window>

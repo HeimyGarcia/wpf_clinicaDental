@@ -16,6 +16,7 @@ namespace Clinica_Dental
         private static string connectionString = ConfigurationManager.ConnectionStrings["Clinica_Dental.Properties.Settings.ClinicaDentalConnectionString"].ConnectionString;
         private SqlConnection sqlConnection = new SqlConnection(connectionString);
 
+
         // Propiedades
         public int Id { get; set; }
 
@@ -26,16 +27,18 @@ namespace Clinica_Dental
         public string Password { get; set; }
 
         public bool Estado { get; set; }
+        public string TipoUsuario { get; set; }
 
         // Constructores
         public Usuario() { }
 
-        public Usuario(string nombreCompleto, string username, string password, bool estado)
+        public Usuario(string nombreCompleto, string username, string password, bool estado, string tipoUsuario)
         {
             NombreCompleto = nombreCompleto;
             Username = username;
             Password = password;
             Estado = estado;
+            TipoUsuario = tipoUsuario;
         }
 
         // Métodos
@@ -76,6 +79,7 @@ namespace Clinica_Dental
                         usuario.Username = rdr["username"].ToString();
                         usuario.Password = rdr["password"].ToString();
                         usuario.Estado = Convert.ToBoolean(rdr["estado"]);
+                        usuario.TipoUsuario = rdr["tipoUsuario"].ToString();
                     }
                 }
 

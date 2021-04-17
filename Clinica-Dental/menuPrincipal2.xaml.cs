@@ -16,14 +16,14 @@ using System.Windows.Threading;
 namespace Clinica_Dental
 {
     /// <summary>
-    /// Lógica de interacción para menuPrincipal.xaml
+    /// Lógica de interacción para menuPrincipal2.xaml
     /// </summary>
-    public partial class menuPrincipal : Window
+    public partial class menuPrincipal2 : Window
     {
         DispatcherTimer Timer;
         double panelWidth;
         bool hidden;
-        public menuPrincipal()
+        public menuPrincipal2()
         {
             InitializeComponent();
             Timer = new DispatcherTimer();
@@ -31,7 +31,7 @@ namespace Clinica_Dental
 
             panelWidth = SidePanel.Width;
         }
-        
+
         private void Timer_Tick(object sender, EventArgs e)
         {
             if (hidden)
@@ -71,28 +71,15 @@ namespace Clinica_Dental
             int index = ListaView.SelectedIndex;
             switch (index)
             {
-                case 0:
-                    GridPrincipal.Children.Clear();
-                    GridPrincipal.Children.Add(new empleadoU());
-                    break;
                 case 1:
-                    GridPrincipal.Children.Clear();
-                    GridPrincipal.Children.Add(new usuarioU());
+                    GridPrincipal2.Children.Clear();
+                    GridPrincipal2.Children.Add(new pacienteU());
                     break;
-                case 2:
-                    GridPrincipal.Children.Clear();
-                    GridPrincipal.Children.Add(new detalleTratamientoU());
-                    break;
-                case 3:
-                    GridPrincipal.Children.Clear();
-                    GridPrincipal.Children.Add(new pacienteU());
-                    break;
+                
 
                 default:
                     break;
             }
         }
-
-        
     }
 }
