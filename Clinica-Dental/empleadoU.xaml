@@ -1,0 +1,75 @@
+﻿<UserControl x:Class="Clinica_Dental.empleadoU"
+             TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+             Background="{DynamicResource MaterialDesignPaper}"
+             TextElement.FontWeight="Medium"
+             TextElement.FontSize="14"
+             FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Clinica_Dental"
+             mc:Ignorable="d" 
+             Height="650" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10" />
+            <RowDefinition Height="79" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="45" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+
+
+        <Label Content="Información del Empleado" FontSize="25" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" Margin="66,12.6,0,28.6" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <Label Content="Identidad" Grid.Row="2" Grid.Column="0" Margin="10 0"/>
+        <Label Content="Nombres" Grid.Row="2" Grid.Column="1" Margin="10 0"/>
+        <Label Content="Apellidos" Grid.Row="2" Grid.Column="2" Margin="10 0"/>
+        <Label Content="Celular" Grid.Row="2" Grid.Column="3" Margin="10 0"/>
+        <Label Content="Correo" Grid.Row="4" Grid.Column="0" Margin="10 0"/>
+        <Label Content="Dirección" Grid.Row="4" Grid.Column="2" Margin="10 0"/>
+        <Label Content="Puesto" Grid.Row="6" Grid.Column="0" Margin="10 0 0 4" VerticalAlignment="Center"/>
+        <Label Content="Estado" Grid.Row="7" Grid.Column="0" Margin="10 0 0 4"/>
+        <Label Content="Sexo" Grid.Row="6" Grid.Column="2" Margin="10 0" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+
+        <TextBox Name="txtIdentidad" Grid.Row="3" Grid.Column="0"  Margin="10 4 4 4" Background="LightGray"/>
+        <TextBox Name="txtNombre" Grid.Row="3" Grid.Column="1"  Margin="4 4" Background="LightGray"/>
+        <TextBox Name="txtApellido" Grid.Row="3" Grid.Column="2"  Margin="4 4" Background="LightGray"/>
+        <TextBox Name="txtCelular" Grid.Row="3" Grid.Column="3"  Margin="4 4" Background="LightGray"/>
+        <TextBox Name="txtCorreo" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Margin="10 4 4 4" Background="LightGray"/>
+        <TextBox Name="txtDireccion" Grid.Row="5" Grid.Column="2" Grid.ColumnSpan="2" Margin="4 4" Background="LightGray"/>
+
+        <Button Name="btnAgregar" Content="Agregar" Grid.Row="3" Grid.Column="4" Margin="10 4" Click="btnAgregar_Click" />
+        <Button Name="btnModificar" Content="Modificar" Grid.Row="5" Grid.Column="4" Margin="10 4" Click="btnModificar_Click" />
+        <Button Name="btnEliminar" Content="Eliminar" Grid.Row="6" Grid.Column="4" Margin="10 4" Click="btnEliminar_Click"/>
+        <Button Style="{DynamicResource MaterialDesignRaisedAccentButton}" Name="btnBuscar" Content="Buscar" Grid.Row="7" Grid.Column="4" Margin="4 4" Click="btnBuscar_Click" />
+
+        <StackPanel Orientation="Horizontal" Margin="10 4" Grid.Row="7" Grid.Column="2" Grid.ColumnSpan="2">
+            <materialDesign:PackIcon Kind="Search" Foreground="{Binding ElementName=txtPaciente, Path=BorderBrush}" VerticalAlignment="Bottom" Margin="0 4"/>
+            <TextBox x:Name="txtIdentidadEmpleado" Width="300" materialDesign:HintAssist.Hint="Identidad Empleado" materialDesign:HintAssist.IsFloating="True"/>
+        </StackPanel>
+
+        <ComboBox Name="cmbPuesto" Grid.Row="6" Grid.Column="1" Margin="4,9.8,4,3.8" Background="LightGray" Height="29"/>
+        <ComboBox Name="cmbEstado" Grid.Row="7" Grid.Column="1" Margin="4,9.8,4,3.8" Background="LightGray" Height="32"/>
+        <ComboBox Name="cmbSexo" Grid.Row ="6" Grid.Column="3" Margin="4,9.8,4,3.8" Background="LightGray" Height="34" VerticalAlignment="Center"/>
+
+        <DataGrid x:Name="dgvEmpleado" Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="6" Margin="10 10" Background="LightBlue" IsReadOnly="True" MouseDoubleClick="dgvEmpleado_MouseDoubleClick"/>
+
+
+    </Grid>
+</UserControl>

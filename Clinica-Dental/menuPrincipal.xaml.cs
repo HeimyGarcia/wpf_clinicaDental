@@ -73,7 +73,7 @@ namespace Clinica_Dental
             {
                 case 0:
                     GridPrincipal.Children.Clear();
-                    GridPrincipal.Children.Add(new pacienteU());
+                    GridPrincipal.Children.Add(new empleadoU());
                     break;
                 case 1:
                     GridPrincipal.Children.Clear();
@@ -82,6 +82,10 @@ namespace Clinica_Dental
                 case 2:
                     GridPrincipal.Children.Clear();
                     GridPrincipal.Children.Add(new detalleTratamientoU());
+                    break;
+                case 3:
+                    GridPrincipal.Children.Clear();
+                    GridPrincipal.Children.Add(new pacienteU());
                     break;
 
                 default:
