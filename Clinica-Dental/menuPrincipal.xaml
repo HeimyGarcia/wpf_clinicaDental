@@ -39,7 +39,7 @@
                     <ListViewItem Height="60">
                         <StackPanel Orientation="Horizontal">
                             <Image Source="/Imagenes/empleados1.jpg" Height="30" Width="30" VerticalAlignment="Center"/>
-                            <TextBlock Text="Empleados" FontSize="24" Margin="15 0 0 0 " VerticalAlignment="Center"/>
+                            <TextBlock Text="Empleados" FontSize="20" Margin="15 0 0 0 " VerticalAlignment="Center"/>
                         </StackPanel>
 
 
@@ -47,21 +47,21 @@
                     <ListViewItem Height="60">
                         <StackPanel Orientation="Horizontal">
                             <Image Source="/Imagenes/usuarios.png" Height="30" Width="30" VerticalAlignment="Center" />
-                            <TextBlock Text="Usuarios" FontSize="24" Margin="15 0 0 0 " VerticalAlignment="Center"/>
+                            <TextBlock Text="Usuarios" FontSize="20" Margin="15 0 0 0 " VerticalAlignment="Center"/>
                         </StackPanel>
 
                     </ListViewItem>
                     <ListViewItem Height="60">
                         <StackPanel Orientation="Horizontal">
                             <Image Source="/Imagenes/puesto.png" Height="30" Width="30" VerticalAlignment="Center"/>
-                            <TextBlock Text="Puestos" FontSize="24" Margin="15 0 0 0 " VerticalAlignment="Center"/>
+                            <TextBlock Text="Tratamiento" FontSize="20" Margin="15 0 0 0 " VerticalAlignment="Center"/>
                         </StackPanel>
 
                     </ListViewItem>
                     <ListViewItem Height="60">
                         <StackPanel Orientation="Horizontal">
                             <Image Source="/Imagenes/paciente.png" Height="30" Width="30" VerticalAlignment="Center"/>
-                            <TextBlock Text="Pacientes" FontSize="24" Margin="15 0 0 0 " VerticalAlignment="Center" Height="37"/>
+                            <TextBlock Text="Pacientes" FontSize="20" Margin="15 0 0 0 " VerticalAlignment="Center" Height="37"/>
                         </StackPanel>
 
                     </ListViewItem>

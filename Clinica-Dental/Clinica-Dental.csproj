@@ -94,6 +94,9 @@
     <Compile Include="detalleTratamiento.xaml.cs">
       <DependentUpon>detalleTratamiento.xaml</DependentUpon>
     </Compile>
+    <Compile Include="detalleTratamientoU.xaml.cs">
+      <DependentUpon>detalleTratamientoU.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Empleado.xaml.cs">
       <DependentUpon>Empleado.xaml</DependentUpon>
     </Compile>
@@ -133,6 +136,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="detalleTratamiento.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="detalleTratamientoU.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
