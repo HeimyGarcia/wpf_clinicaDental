@@ -71,6 +71,10 @@ namespace Clinica_Dental
             int index = ListaView.SelectedIndex;
             switch (index)
             {
+                case 0:
+                    GridPrincipal2.Children.Clear();
+                    GridPrincipal2.Children.Add(new ListaCitas());
+                    break;
                 case 1:
                     GridPrincipal2.Children.Clear();
                     GridPrincipal2.Children.Add(new pacienteU());

@@ -112,6 +112,10 @@
       <DependentUpon>historialConsulta.xaml</DependentUpon>
     </Compile>
     <Compile Include="HistorialesClinicos.cs" />
+    <Compile Include="ListaCita.cs" />
+    <Compile Include="ListaCitas.xaml.cs">
+      <DependentUpon>ListaCitas.xaml</DependentUpon>
+    </Compile>
     <Compile Include="menuPrincipal.xaml.cs">
       <DependentUpon>menuPrincipal.xaml</DependentUpon>
     </Compile>
@@ -177,6 +181,10 @@
       <DependentUpon>InicioSesion.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="ListaCitas.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="menuPrincipal.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
