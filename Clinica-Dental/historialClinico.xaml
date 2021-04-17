@@ -45,9 +45,9 @@
             </Grid>
         </Border>
 
-        <Label Content="Información del Historial" FontSize="25" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="6" Margin="0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-        <Label Content="Id Historial Clinico" Grid.Row="2" Grid.Column="0" Margin="10 0"/>
-        <Label Content="Identidad paciente" Grid.Row="2" Grid.Column="1" Margin="6,0,4,0"/>
+        <Label Content="Historial Clínico" FontSize="25" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="6" Margin="0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <Label Content="Id " Grid.Row="2" Grid.Column="0" Margin="10 0"/>
+        <Label Content="Paciente" Grid.Row="2" Grid.Column="1" Margin="6,0,4,0"/>
 
 
         <Label Content="Observaciones" Grid.Row="4" Grid.Column="0" Margin="10 0"/>

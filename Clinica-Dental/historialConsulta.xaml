@@ -46,13 +46,13 @@
         </Border>
 
         <Label Content="Historial Consulta" FontSize="25" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="6" Margin="0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-        <Label Content="Historial clinico" Grid.Row="2" Grid.Column="1" Margin="10 0" HorizontalAlignment="Center"/>
-        <Label Content="Consulta" Grid.Row="2" Grid.Column="0" Margin="10 0" HorizontalAlignment="Center"/>
+        <Label Content="Historial clínico" Grid.Row="2" Grid.Column="1" Margin="10 0"/>
+        <Label Content="Consulta" Grid.Row="2" Grid.Column="0" Margin="10 0" />
 
         <Label Content="Motivo consulta" Grid.Row="2" Grid.Column="2" Margin="10 0" HorizontalAlignment="Center" Grid.ColumnSpan="2"/>
         <Label Content="Observaciones" Grid.Row="4" Grid.Column="0" Margin="10 0" HorizontalAlignment="Center" Grid.ColumnSpan="2"/>
-        <Label Content="Empleado" Grid.Row="5" Grid.Column="2" Margin="10 10  " HorizontalAlignment="Center"/>
-        <Label Content="Estado" Grid.Row="5" Grid.Column="3" Margin="10 10  " HorizontalAlignment="Center"/>
+        <Label Content="Empleado" Grid.Row="5" Grid.Column="2" Margin="10 10  " />
+        <Label Content="Estado" Grid.Row="5" Grid.Column="3" Margin="10 10  " />
 
         <Image Source="/Imagenes/LogoMedicDentalSystem.jpeg.jpeg" Grid.Row="1" Grid.Column="1" Stretch="Uniform" Margin="10 0 0 10" HorizontalAlignment="Right"/>
 
