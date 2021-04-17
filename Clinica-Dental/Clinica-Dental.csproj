@@ -121,6 +121,9 @@
       <DependentUpon>usuario.xaml</DependentUpon>
     </Compile>
     <Compile Include="Usuarios.cs" />
+    <Compile Include="usuarioU.xaml.cs">
+      <DependentUpon>usuarioU.xaml</DependentUpon>
+    </Compile>
     <Page Include="cita.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -170,6 +173,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="usuario.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="usuarioU.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
