@@ -58,7 +58,7 @@ namespace Clinica_Dental
         }
         private void ObtenerValoresFormulario()
         {
-            consulta.IdHistorialClinico = Convert.ToInt32(txtHistorialClinico.Text);
+            
             consulta.FechaCreacion = DateTime.Now;
             consulta.Afecciones = txtAfecciones.Text;
             consulta.Observaciones = txtObservaciones.Text;
@@ -68,7 +68,7 @@ namespace Clinica_Dental
         private bool VerificarValores()
         {
             if (txtAfecciones.Text == string.Empty ||
-                txtObservaciones.Text == string.Empty || txtHistorialClinico.Text == string.Empty)
+                txtObservaciones.Text == string.Empty )
             {
                 MessageBox.Show("Por favor ingresa todos los valores en las cajas de texto");
                 return false;
