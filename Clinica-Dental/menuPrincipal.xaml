@@ -65,6 +65,14 @@
                         </StackPanel>
 
                     </ListViewItem>
+
+                    <ListViewItem Height="60">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="/Imagenes/cita.jpg" Height="30" Width="30" VerticalAlignment="Center"/>
+                            <TextBlock Text="Citas" FontSize="20" Margin="15 0 0 0 " VerticalAlignment="Center" Height="37"/>
+                        </StackPanel>
+
+                    </ListViewItem>
                 </ListView>
             </StackPanel>
         </Grid>

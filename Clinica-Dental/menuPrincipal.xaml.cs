@@ -87,6 +87,10 @@ namespace Clinica_Dental
                     GridPrincipal.Children.Clear();
                     GridPrincipal.Children.Add(new pacienteU());
                     break;
+                case 4:
+                    GridPrincipal.Children.Clear();
+                    GridPrincipal.Children.Add(new ListaCitas());
+                    break;
 
                 default:
                     break;
