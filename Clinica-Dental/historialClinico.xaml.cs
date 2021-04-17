@@ -37,7 +37,7 @@ namespace Clinica_Dental
             // Llenar el combobox de estado
             cmbEstado.ItemsSource = Enum.GetValues(typeof(estadoClinico));
             txtIdentidadPaciente.Text = identidadPaciente;
-            // Llenar el listbox de DetalleTratamiento
+            // Llenar el listbox de historialClinico
             ObtenerHistorialClinico();
 
 
@@ -132,9 +132,9 @@ namespace Clinica_Dental
             }
             catch (Exception ex)
             {
-                //MessageBox.Show("Ha ocurrido un error al momento de eliminar el historial...");
-                //Console.WriteLine(ex.Message);
-                throw ex;
+                MessageBox.Show("Ha ocurrido un error al momento de eliminar el historial...");
+                Console.WriteLine(ex.Message);
+                
             }
             finally
             {
@@ -178,9 +178,9 @@ namespace Clinica_Dental
                 }
                 catch (Exception ex)
                 {
-                    //MessageBox.Show("Ha ocurrido un error al momento de insertar al paciente...");
-                    //Console.WriteLine(ex.Message)
-                    throw ex;
+                    MessageBox.Show("Ha ocurrido un error al momento de insertar el historialClinico...");
+                    Console.WriteLine(ex.Message);
+                    
                 }
                 finally
                 {
@@ -202,7 +202,7 @@ namespace Clinica_Dental
                 {
                     try
                     {
-                        // Obtener los valores para la consulta desde el formulario
+                        // Obtener los valores para el historialClinico desde el formulario
                         ObtenerValoresFormulario();
 
                         // Mostrar un mensaje de confirmación
@@ -210,7 +210,7 @@ namespace Clinica_Dental
 
                         if (result == MessageBoxResult.Yes)
                         {
-                            // Modificar Tratamiento
+                            // Modificar historialClinico
                             consulta.ModificarHistorialClinico(consulta);
 
                             // Mensaje de actualización realizada
@@ -225,7 +225,7 @@ namespace Clinica_Dental
                     }
                     finally
                     {
-                        // Actualizar los pacientes
+                        // Actualizar los historialClinico
                         ObtenerHistorialClinico();
 
                         LimpiarFormulario();
@@ -240,10 +240,10 @@ namespace Clinica_Dental
         {
             try
             {
-                // Implementar la búsqueda del paciente desde la clase Paciente
+                // Implementar la búsqueda del historialClinico desde la clase HistorialClinico
                 HistorialesClinicos elHistorial = consulta.BuscarHistorialClinico(txtIdentidadPaciente.Text);
 
-                // Verificar si el paciente existe
+                // Verificar si el historialClinico existe
                 if (elHistorial.IdHistorialClinico == null)
                     MessageBox.Show("El historial clínico no ha sido seleccionado. Favor verificar.");
                 else
@@ -282,7 +282,7 @@ namespace Clinica_Dental
                 // Implementar la búsqueda del historiallinico desde la clase HistorialClinico
                 HistorialesClinicos loshistorialesClinicos = consulta.BuscarHistorialClinico2(Convert.ToInt32(txtHistorialClinico.Text));
 
-                // Verificar si el paciente existe
+                // Verificar si el historialClinico existe
                 if (Convert.ToInt32(loshistorialesClinicos.IdHistorialClinico).ToString() == null)
                     MessageBox.Show("El historialClinico no ha sido seleccionado. Favor verificar.");
                 else

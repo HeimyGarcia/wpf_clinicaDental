@@ -184,9 +184,9 @@ namespace Clinica_Dental
                 }
                 catch (Exception ex)
                 {
-                    //MessageBox.Show("Ha ocurrido un error al momento de insertar al paciente...");
-                    //Console.WriteLine(ex.Message)
-                    throw ex;
+                    MessageBox.Show("Ha ocurrido un error al momento de insertar al paciente...");
+                    Console.WriteLine(ex.Message);
+                    
                 }
                 finally
                 {

@@ -76,7 +76,7 @@ namespace Clinica_Dental
         /// <summary>
         /// Inserta una Consulta.
         /// </summary>
-        /// <param name="historialConsulta">La información del detalleTratamiento</param>
+        /// <param name="historialConsulta">La información del HistorialConsulta</param>
         public void CrearHistorialConsulta(HistorialConsulta historialConsulta)
         {
             try
@@ -119,7 +119,7 @@ namespace Clinica_Dental
         /// <returns>Un listado de las consultas</returns>
         public List<HistorialConsulta> MostrarHistorialConsulta(int idHistorialClinico)
         {
-            // Inicializar una lista vacía de habitaciones
+            // Inicializar una lista vacía de HistorialConsulta
             List<HistorialConsulta> consultas = new List<HistorialConsulta>();
 
             try
@@ -168,9 +168,9 @@ namespace Clinica_Dental
         }
 
         /// <summary>
-        /// Obtiene un detalle por su idHistorialClinico
+        /// Obtiene un detalle por su HistorialConsulta
         /// </summary>
-        /// <param name="idHistorialClinico">El idHistorialConsulta del HistorialConsulta</param>
+        /// <param name="idHistorialConsulta">El idHistorialConsulta del HistorialConsulta</param>
         /// <returns>Los datos del HistorialConsulta</returns>
         public HistorialConsulta BuscarHistorialConsulta(int idHistorialConsulta)
         {

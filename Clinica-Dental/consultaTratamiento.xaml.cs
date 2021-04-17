@@ -120,10 +120,10 @@ namespace Clinica_Dental
             {
                 try
                 {
-                    // Obtener los valores para la habitación
+                    // Obtener los valores para la consultaTratamiento
                     ObtenerValoresFormulario();
 
-                    // Insertar los datos de la habitación
+                    // Insertar los datos de la consultaTratamiento
                     elTratamiento.CrearTratamiento(elTratamiento);
 
                     // Mensaje de inserción exitosa
@@ -132,9 +132,9 @@ namespace Clinica_Dental
                 }
                 catch (Exception ex)
                 {
-                    //MessageBox.Show("Ha ocurrido un error al momento de insertar al paciente...");
-                    //Console.WriteLine(ex.Message)
-                    throw ex;
+                    MessageBox.Show("Ha ocurrido un error al momento de insertar al consultaTratamiento...");
+                    Console.WriteLine(ex.Message);
+
                 }
                 finally
                 {
@@ -190,7 +190,7 @@ namespace Clinica_Dental
                     }
                     finally
                     {
-                        // Actualizar los pacientes
+                        // Actualizar consultaTratamiento
                         ObtenerTratamiento();
 
                         LimpiarFormulario();
@@ -213,20 +213,20 @@ namespace Clinica_Dental
 
                     if (result == MessageBoxResult.Yes)
                     {
-                        // Eliminar la habitación
+                        // Eliminar el tratamiento
                         elTratamiento.EliminarTratamiento(elTratamiento);
                     }
                 }
             }
             catch (Exception ex)
             {
-                //MessageBox.Show("Ha ocurrido un error al momento de eliminar la consulta...");
-                //Console.WriteLine(ex.Message);
-                throw ex;
+                MessageBox.Show("Ha ocurrido un error al momento de eliminar el tratamiento...");
+                Console.WriteLine(ex.Message);
+                
             }
             finally
             {
-                // Actualizar los pacientes
+                // Actualizar los tratamiento
                 ObtenerTratamiento();
 
                 LimpiarFormulario();

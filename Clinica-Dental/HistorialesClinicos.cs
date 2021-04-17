@@ -119,7 +119,7 @@ namespace Clinica_Dental
         /// <summary>
         /// Muestra todas las consultas
         /// </summary>
-        /// <returns>Un listado de las consultas</returns>
+        /// <returns>Un listado de las historialClinico</returns>
         public List<HistorialesClinicos> MostrarHistorialClinico(string identidadPaciente)
         {
             // Inicializar una lista vacía de habitaciones
@@ -170,10 +170,10 @@ namespace Clinica_Dental
         }
 
         /// <summary>
-        /// Obtiene un detalle por su idHistorialConsulta
+        /// Obtiene un detalle por su historialClinico
         /// </summary>
-        /// <param name="idHistorialClinico">El idHistorialConsulta del HistorialConsulta</param>
-        /// <returns>Los datos del HistorialConsulta</returns>
+        /// <param name="idHistorialClinico">El idHistorialConsulta del historialClinico</param>
+        /// <returns>Los datos del historialClinico</returns>
         public HistorialesClinicos BuscarHistorialClinico(string identidadPaciente)
         {
             HistorialesClinicos elhistorialClinico = new HistorialesClinicos();
@@ -221,7 +221,7 @@ namespace Clinica_Dental
         /// Obtiene un detalle por su idHistorialclinico
         /// </summary>
         /// <param name="idHistorialClinico">El idHistorialClinico del HistorialClinico</param>
-        /// <returns>Los datos del HistorialConsulta</returns>
+        /// <returns>Los datos del historialClinico</returns>
         public HistorialesClinicos BuscarHistorialClinico2(int idHistorialClinico)
         {
             HistorialesClinicos elhistorialClinico = new HistorialesClinicos();
@@ -311,7 +311,7 @@ namespace Clinica_Dental
         /// <summary>
         /// Elimina una consulta
         /// </summary>
-        /// <param name="historialConsulta">La informacion de la consulta</param>
+        /// <param name="historialConsulta">La informacion del historialClinico</param>
         public void EliminarHistorialConsulta(HistorialesClinicos historialClinico)
         {
             try

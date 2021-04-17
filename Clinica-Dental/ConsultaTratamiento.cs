@@ -122,7 +122,7 @@ namespace Clinica_Dental
 
                 sqlCommand.Parameters.AddWithValue("@idHistorialConsulta", idHistorialConsulta);
 
-                // Obtener los datos de las habitaciones
+                // Obtener los datos de las tratamiento
                 using (SqlDataReader rdr = sqlCommand.ExecuteReader())
                 {
                     while (rdr.Read())
@@ -153,7 +153,6 @@ namespace Clinica_Dental
         /// Obtiene un detalle por su Tratamiento
         /// </summary>
         /// <param name="idTratamiento">El idTratamiento del DetalleTratamiento</param>
-        /// <param name="idHistorialConsulta">El idHistorialConsulta del Tratamiento</param>
         /// <returns>Los datos del DetalleTratamiento</returns>
         public ConsultaTratamiento BuscarTratamiento(int idTratamiento)
         {

@@ -119,7 +119,7 @@ namespace Clinica_Dental
         /// <returns>Un listado de los detalleTratamiento</returns>
         public List<DetalleTratamiento> MostrarDetalleTratamiento()
         {
-            // Inicializar una lista vacía de habitaciones
+            // Inicializar una lista vacía de detalleTratamiento
             List<DetalleTratamiento> detalleTratamientos = new List<DetalleTratamiento>();
 
             try
@@ -133,7 +133,7 @@ namespace Clinica_Dental
                 // Crear el comando SQL
                 SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
 
-                // Obtener los datos de las habitaciones
+                // Obtener los datos de los detalleTratamiento
                 using (SqlDataReader rdr = sqlCommand.ExecuteReader())
                 {
                     while (rdr.Read())

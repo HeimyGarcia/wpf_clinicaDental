@@ -198,7 +198,7 @@ namespace Clinica_Dental
 
                     if (result == MessageBoxResult.Yes)
                     {
-                        // Eliminar un empleado
+                        // Eliminar un usuario
                         usuarios.EliminarUsuario(usuarios);
                     }
                 }

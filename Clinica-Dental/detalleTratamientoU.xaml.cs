@@ -95,10 +95,10 @@ namespace Clinica_Dental
             {
                 try
                 {
-                    // Obtener los valores para la habitación
+                    // Obtener los valores el detalleTratamiento
                     ObtenerValoresFormulario();
 
-                    // Insertar los datos de la habitación
+                    // Insertar los datos de el detalleTratamiento
                     Tratamiento.CrearDetalleTratamiento(Tratamiento);
 
                     // Mensaje de inserción exitosa
@@ -107,9 +107,9 @@ namespace Clinica_Dental
                 }
                 catch (Exception ex)
                 {
-                    //MessageBox.Show("Ha ocurrido un error al momento de insertar al paciente...");
-                    //Console.WriteLine(ex.Message)
-                    throw ex;
+                    MessageBox.Show("Ha ocurrido un error al momento de insertar el detalleTratamiento...");
+                    Console.WriteLine(ex.Message);
+                    
                 }
                 finally
                 {
@@ -192,9 +192,9 @@ namespace Clinica_Dental
             }
             catch (Exception ex)
             {
-                //MessageBox.Show("Ha ocurrido un error al momento de eliminar el tratamiento...");
-                //Console.WriteLine(ex.Message);
-                throw ex;
+                MessageBox.Show("Ha ocurrido un error al momento de eliminar el tratamiento...");
+                Console.WriteLine(ex.Message);
+                
             }
             finally
             {

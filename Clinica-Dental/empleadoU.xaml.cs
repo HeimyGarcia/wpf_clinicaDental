@@ -181,9 +181,9 @@ namespace Clinica_Dental
                 }
                 catch (Exception ex)
                 {
-                    //MessageBox.Show("Ha ocurrido un error al momento de insertar al paciente...");
-                    //Console.WriteLine(ex.Message)
-                    throw ex;
+                    MessageBox.Show("Ha ocurrido un error al momento de insertar al empleado...");
+                    Console.WriteLine(ex.Message);
+                    
                 }
                 finally
                 {
@@ -211,7 +211,7 @@ namespace Clinica_Dental
                 {
                     try
                     {
-                        // Obtener los valores para la habitación desde el formulario
+                        // Obtener los valores para el empleado
                         ObtenerValoresFormulario();
 
                         // Mostrar un mensaje de confirmación
@@ -256,7 +256,7 @@ namespace Clinica_Dental
             try
             {
                 if (dgvEmpleado.SelectedValue == null)
-                    MessageBox.Show("Por favor selecciona un paciente desde el listado");
+                    MessageBox.Show("Por favor selecciona un empleado desde el listado");
                 else
                 {
                     // Mostrar un mensaje de confirmación

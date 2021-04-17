@@ -79,7 +79,7 @@
 
 
         <ComboBox Name="cmbEstado" Grid.Row ="6" Grid.Column="3" Margin="4 4" Background="LightGray"/>
-        <DataGrid x:Name="dgvHistorialConsulta" Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="6" Margin="10 10" Background="LightBlue" MouseDoubleClick="dgvDetalleTratamiento_MouseDoubleClick" />
+        <DataGrid x:Name="dgvHistorialConsulta" Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="6" Margin="10 10" IsReadOnly="True" Background="LightBlue" MouseDoubleClick="dgvDetalleTratamiento_MouseDoubleClick" />
 
     </Grid>
 </Window>

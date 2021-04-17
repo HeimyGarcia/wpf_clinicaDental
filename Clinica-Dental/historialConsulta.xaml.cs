@@ -42,7 +42,7 @@ namespace Clinica_Dental
             txtHistorialClinico.Text = Convert.ToInt32(idHistorialClinico).ToString();
             //Llenar el combobox de Empleado
             ObtenerListaEmpleado();
-            // Llenar el listbox de DetalleTratamiento
+            // Llenar el listbox de HistorialConsulta
             ObtenerHistorialConsulta();
             
         }
@@ -134,10 +134,10 @@ namespace Clinica_Dental
             {
                 try
                 {
-                    // Obtener los valores para la habitación
+                    // Obtener los valores para HistorialConsulta
                     ObtenerValoresFormulario();
 
-                    // Insertar los datos de la habitación
+                    // Insertar los datos de HistorialConsulta
                     consulta.CrearHistorialConsulta(consulta);
 
                     // Mensaje de inserción exitosa
@@ -146,9 +146,9 @@ namespace Clinica_Dental
                 }
                 catch (Exception ex)
                 {
-                    //MessageBox.Show("Ha ocurrido un error al momento de insertar al paciente...");
-                    //Console.WriteLine(ex.Message)
-                    throw ex;
+                    MessageBox.Show("Ha ocurrido un error al momento de insertar el HistorialConsulta...");
+                    Console.WriteLine(ex.Message);
+                    
                 }
                 finally
                 {
@@ -227,20 +227,20 @@ namespace Clinica_Dental
 
                     if (result == MessageBoxResult.Yes)
                     {
-                        // Eliminar la habitación
+                        // Eliminar el HistorialConsulta
                         consulta.EliminarHistorialConsulta(consulta);
                     }
                 }
             }
             catch (Exception ex)
             {
-                //MessageBox.Show("Ha ocurrido un error al momento de eliminar la consulta...");
-                //Console.WriteLine(ex.Message);
-                throw ex;
+                MessageBox.Show("Ha ocurrido un error al momento de eliminar la consulta...");
+                Console.WriteLine(ex.Message);
+                
             }
             finally
             {
-                // Actualizar los pacientes
+                // Actualizar HistorialConsulta
                 ObtenerHistorialConsulta();
 
                 LimpiarFormulario();
