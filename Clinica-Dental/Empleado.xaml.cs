@@ -256,8 +256,13 @@ namespace Clinica_Dental
                 {
                     //MessageBox.Show("Ha ocurrido un error al momento de insertar al paciente...");
                     //Console.WriteLine(ex.Message)
+
                     MessageBox.Show("Estimado usuario ya existe un empleado con esa identidad");
-                    //throw ex;
+                    //throw ex
+
+                    
+
+
                 }
                 finally
                 {
