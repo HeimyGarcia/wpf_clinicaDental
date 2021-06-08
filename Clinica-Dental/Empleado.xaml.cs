@@ -131,8 +131,14 @@ namespace Clinica_Dental
 
         private bool VerificarValores()
         {
-
-            if (txtIdentidad.Text == string.Empty)
+            if (txtIdentidad.Text == string.Empty && txtNombre.Text == string.Empty &&
+                    txtApellido.Text == string.Empty && txtDireccion.Text == string.Empty &&
+                    txtCorreo.Text == string.Empty && txtCelular.Text == string.Empty)
+            {
+                MessageBox.Show("Por favor ingresa los datos corresponientes en cada una de las cajas de texto");
+                return false;
+            }
+            else if (txtIdentidad.Text == string.Empty)
             {
                 MessageBox.Show("Por favor ingresa el numero de identidad del empleado");
                 return false;
@@ -160,13 +166,6 @@ namespace Clinica_Dental
             else if (txtCelular.Text == string.Empty)
             {
                 MessageBox.Show("Por ingresa el numero de celular del empleado");
-                return false;
-            }
-            else if (txtIdentidad.Text == string.Empty && txtNombre.Text == string.Empty &&
-                    txtApellido.Text == string.Empty && txtDireccion.Text == string.Empty &&
-                    txtCorreo.Text == string.Empty && txtCelular.Text == string.Empty)
-            {
-                MessageBox.Show("Por favor ingresa los datos corresponientes en cada una de las cajas de texto");
                 return false;
             }
             else if (IsValidEmail(txtCorreo.Text) == false)
