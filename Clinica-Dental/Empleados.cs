@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Data.SqlClient;
 using System.Configuration;
 using System.Globalization;
+using System.Windows;
 
 namespace Clinica_Dental
 {
@@ -121,6 +122,8 @@ namespace Clinica_Dental
             try
             {
                 // Query de inserción
+
+               
                 string query = @"insert into [Empleados].[Empleado]
                                 values (@identidad,@nombres,@apellidos,@direccion,
                                 @correo,@celular,@sexo, @puesto, @estado)";
