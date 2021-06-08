@@ -131,11 +131,42 @@ namespace Clinica_Dental
 
         private bool VerificarValores()
         {
-            if (txtIdentidad.Text == string.Empty || txtNombre.Text == string.Empty ||
-                txtApellido.Text == string.Empty || txtDireccion.Text == string.Empty ||
-                txtCorreo.Text == string.Empty || txtCelular.Text == string.Empty)
+
+            if (txtIdentidad.Text == string.Empty)
             {
-                MessageBox.Show("Por favor ingresa todos los valores en las cajas de texto");
+                MessageBox.Show("Por favor ingresa el numero de identidad del empleado");
+                return false;
+            }
+            else if (txtNombre.Text == string.Empty)
+            {
+                MessageBox.Show("Por favor ingresa el nombre del empleado");
+                return false;
+            }
+            else if (txtApellido.Text == string.Empty)
+            {
+                MessageBox.Show("Por favor ingresa el apellido del empleado");
+                return false;
+            }
+            else if (txtDireccion.Text == string.Empty)
+            {
+                MessageBox.Show("Por favor ingresa la direccion del empleado");
+                return false;
+            }
+            else if (txtCorreo.Text == string.Empty)
+            {
+                MessageBox.Show("Por favor ingresa el correo del empleado");
+                return false;
+            }
+            else if (txtCelular.Text == string.Empty)
+            {
+                MessageBox.Show("Por ingresa el numero de celular del empleado");
+                return false;
+            }
+            else if (txtIdentidad.Text == string.Empty && txtNombre.Text == string.Empty &&
+                    txtApellido.Text == string.Empty && txtDireccion.Text == string.Empty &&
+                    txtCorreo.Text == string.Empty && txtCelular.Text == string.Empty)
+            {
+                MessageBox.Show("Por favor ingresa los datos corresponientes en cada una de las cajas de texto");
                 return false;
             }
             else if (IsValidEmail(txtCorreo.Text) == false)
