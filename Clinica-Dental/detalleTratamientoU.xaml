@@ -63,7 +63,7 @@
 
         <StackPanel Orientation="Horizontal" Margin="10 4" Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2">
             <materialDesign:PackIcon Kind="Search" Foreground="{Binding ElementName=txtPaciente, Path=BorderBrush}" VerticalAlignment="Bottom" Margin="0 4"/>
-            <TextBox x:Name="txtDetalleTratamiento" Width="300" materialDesign:HintAssist.Hint="tratamiento" materialDesign:HintAssist.IsFloating="True"/>
+            <TextBox x:Name="txtDetalleTratamiento" Width="300" materialDesign:HintAssist.Hint="tratamiento" materialDesign:HintAssist.IsFloating="True" PreviewTextInput="txtDetalle_PreviewTextInput"/>
         </StackPanel>
 
 

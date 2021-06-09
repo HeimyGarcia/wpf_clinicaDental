@@ -260,5 +260,14 @@ namespace Clinica_Dental
 
             
         }
+
+        private void txtDetalle_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            int ascci = Convert.ToInt32(Convert.ToChar(e.Text));
+
+            if (ascci >= 48 && ascci <= 57) e.Handled = false;
+
+            else e.Handled = true;
+        }
     }
 }
