@@ -49,14 +49,9 @@ namespace Clinica_Dental
 
         private void ObtenerListaDetalleTratamiento()
         {
-            SqlCommand command = new SqlCommand("Select nombreTratamiento, idTratamiento from Pacientes.DetalleTratamiento", sqlConnection);
-            sqlConnection.Open();
-            SqlDataReader rdr = command.ExecuteReader();
-            while (rdr.Read())
-            {
-                cmbTratamiento.Items.Add(rdr["idTratamiento"].ToString());
-            }
-            sqlConnection.Close();
+            cmbTratamiento.ItemsSource = detalleTratamiento.MostrarDetalleTratamiento();
+            cmbTratamiento.DisplayMemberPath = "NombreTratamiento";
+            cmbTratamiento.SelectedValuePath = "IdTratamiento";
 
 
         }
@@ -74,7 +69,7 @@ namespace Clinica_Dental
 
         private void ObtenerValoresFormulario()
         {
-            elTratamiento.IdTratamiento = Convert.ToInt32(cmbTratamiento.Text);
+            elTratamiento.IdTratamiento = Convert.ToInt32(cmbTratamiento.SelectedValue.ToString());
             elTratamiento.IdHistorialConsulta = Convert.ToInt32(txtDetalleConsulta.Text);
             elTratamiento.Estado = (estadoConsultaTratamiento)cmbEstado.SelectedItem;
         }

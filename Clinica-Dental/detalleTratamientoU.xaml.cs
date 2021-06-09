@@ -56,9 +56,7 @@ namespace Clinica_Dental
         }
         private bool VerificarValores()
         {
-            if (txtNombreTratamiento.Text == string.Empty ||
-                txtDuracionTratamiento.Text == string.Empty || txtPrecioTratamiento.Text == string.Empty ||
-                txtIndicacionesTratamiento.Text == string.Empty)
+            if (!EsEspacio(txtNombreTratamiento.Text))
             {
                 MessageBox.Show("Por favor ingresa todos los valores en las cajas de texto");
                 return false;
