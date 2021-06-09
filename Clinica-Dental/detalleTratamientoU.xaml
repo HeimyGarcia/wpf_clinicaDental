@@ -45,9 +45,9 @@
 
 
 
-        <TextBox Name="txtNombreTratamiento" Grid.Row="3" Grid.Column="0"  Margin="10 4 4 4" Background="LightGray" Grid.ColumnSpan="2"/>
+        <TextBox Name="txtNombreTratamiento" Grid.Row="3" Grid.Column="0"  Margin="10 4 4 4" Background="LightGray" Grid.ColumnSpan="2" PreviewTextInput="txtNombre_PreviewTextInput"/>
         <TextBox Name="txtDuracionTratamiento" Grid.Row="3" Grid.Column="2"  Margin="4 4" Background="LightGray"/>
-        <TextBox Name="txtPrecioTratamiento" Grid.Row="3" Grid.Column="3"  Margin="4 4" Background="LightGray"/>
+        <TextBox Name="txtPrecioTratamiento" Grid.Row="3" Grid.Column="3"  Margin="4 4" Background="LightGray" PreviewTextInput="txtPrecio_PreviewTextInput"/>
         <TextBox Name="txtIndicacionesTratamiento" Grid.Row="5" Grid.Column="0"  Margin="4,0,3.8,3.6" Background="LightGray" Height="76" VerticalAlignment="Bottom" Grid.ColumnSpan="3" Grid.RowSpan="2"/>
 
 

@@ -235,5 +235,30 @@ namespace Clinica_Dental
         {
             return !string.IsNullOrWhiteSpace(value);
         }
+
+        private void txtNombre_PreviewTextInput(object sender, TextCompositionEventArgs e)
+
+        {
+            int ascci = Convert.ToInt32(Convert.ToChar(e.Text));
+
+            if (ascci >= 65 && ascci <= 90 || ascci >= 97 && ascci <= 122)
+
+                e.Handled = false;
+
+            else e.Handled = true;
+
+        }
+
+        private void txtPrecio_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            
+            int ascci = Convert.ToInt32(Convert.ToChar(e.Text));
+
+            if (ascci >= 48 && ascci <= 57) e.Handled = false;
+
+            else e.Handled = true;
+
+            
+        }
     }
 }
