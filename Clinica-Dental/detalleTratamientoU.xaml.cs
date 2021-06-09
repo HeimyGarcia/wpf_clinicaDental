@@ -68,6 +68,26 @@ namespace Clinica_Dental
                 MessageBox.Show("Por favor selecciona el estado del DetalleTratamiento");
                 return false;
             }
+            else if (!EsEspacio(txtDuracionTratamiento.Text))
+            {
+                MessageBox.Show("Por favor llena el campo de duracion.");
+                return false;
+            }
+            else if (!EsEspacio(txtIndicacionesTratamiento.Text))
+            {
+                MessageBox.Show("Por favor llena el campo de indicaciones.");
+                return false;
+            }
+            else if (!EsEspacio(txtNombreTratamiento.Text))
+            {
+                MessageBox.Show("Por favor llena el campo de nombre.");
+                return false;
+            }
+            else if (!EsEspacio(txtPrecioTratamiento.Text))
+            {
+                MessageBox.Show("Por favor llena el campo de precio.");
+                return false;
+            }
 
             return true;
         }
@@ -211,6 +231,11 @@ namespace Clinica_Dental
             Tratamiento = Tratamiento.BuscarDetalleTratamiento(Convert.ToInt32(txtDetalleTratamiento.Text));
 
             ValoresFormularioDesdeObjeto();
+        }
+
+        public bool EsEspacio(string value)
+        {
+            return !string.IsNullOrWhiteSpace(value);
         }
     }
 }
