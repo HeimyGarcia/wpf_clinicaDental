@@ -226,9 +226,18 @@ namespace Clinica_Dental
 
         private void btnBuscar_Click(object sender, RoutedEventArgs e)
         {
-            Tratamiento = Tratamiento.BuscarDetalleTratamiento(Convert.ToInt32(txtDetalleTratamiento.Text));
+            if (!EsEspacio(txtDetalleTratamiento.Text))
+            {
+                MessageBox.Show("El buscador esta vacio, inserta datos si quieres buscar.");
+                
+            }
+            else
+            {
+                Tratamiento = Tratamiento.BuscarDetalleTratamiento(Convert.ToInt32(txtDetalleTratamiento.Text));
 
-            ValoresFormularioDesdeObjeto();
+                ValoresFormularioDesdeObjeto();
+            }
+
         }
 
         public bool EsEspacio(string value)
